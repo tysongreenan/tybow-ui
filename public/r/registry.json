@@ -1,0 +1,397 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tybow",
+  "homepage": "http://localhost:3000",
+  "items": [
+    {
+      "name": "theme-editorial",
+      "type": "registry:theme",
+      "title": "Editorial theme",
+      "description": "Serif magazine skin for boutique builders.",
+      "cssVars": {
+        "theme": {
+          "font-sans": "Source Sans 3, ui-sans-serif, system-ui, sans-serif",
+          "font-display": "Fraunces, ui-serif, Georgia, serif",
+          "font-heading": "Fraunces, ui-serif, Georgia, serif",
+          "spacing-section": "6.5rem",
+          "text-display": "3rem"
+        },
+        "light": {
+          "background": "oklch(0.975 0.01 85)",
+          "foreground": "oklch(0.22 0.02 50)",
+          "card": "oklch(0.99 0.005 85)",
+          "card-foreground": "oklch(0.22 0.02 50)",
+          "popover": "oklch(0.99 0.005 85)",
+          "popover-foreground": "oklch(0.22 0.02 50)",
+          "primary": "oklch(0.22 0.02 50)",
+          "primary-foreground": "oklch(0.975 0.01 85)",
+          "secondary": "oklch(0.94 0.012 80)",
+          "secondary-foreground": "oklch(0.22 0.02 50)",
+          "muted": "oklch(0.94 0.012 80)",
+          "muted-foreground": "oklch(0.45 0.02 55)",
+          "accent": "oklch(0.55 0.035 70)",
+          "accent-foreground": "oklch(0.98 0.008 85)",
+          "destructive": "oklch(0.55 0.16 25)",
+          "border": "oklch(0.88 0.015 80)",
+          "input": "oklch(0.88 0.015 80)",
+          "ring": "oklch(0.55 0.035 70)",
+          "radius": "0.75rem"
+        },
+        "dark": {
+          "background": "oklch(0.22 0.02 50)",
+          "foreground": "oklch(0.975 0.01 85)",
+          "card": "oklch(0.26 0.02 50)",
+          "card-foreground": "oklch(0.975 0.01 85)",
+          "popover": "oklch(0.26 0.02 50)",
+          "popover-foreground": "oklch(0.975 0.01 85)",
+          "primary": "oklch(0.94 0.012 80)",
+          "primary-foreground": "oklch(0.22 0.02 50)",
+          "secondary": "oklch(0.3 0.02 50)",
+          "secondary-foreground": "oklch(0.975 0.01 85)",
+          "muted": "oklch(0.3 0.02 50)",
+          "muted-foreground": "oklch(0.75 0.02 80)",
+          "accent": "oklch(0.55 0.035 70)",
+          "accent-foreground": "oklch(0.98 0.008 85)",
+          "destructive": "oklch(0.65 0.16 25)",
+          "border": "oklch(1 0 0 / 12%)",
+          "input": "oklch(1 0 0 / 14%)",
+          "ring": "oklch(0.55 0.035 70)",
+          "radius": "0.75rem"
+        }
+      }
+    },
+    {
+      "name": "theme-coastal",
+      "type": "registry:theme",
+      "title": "Coastal theme",
+      "description": "Quiet land, lake, and place. Moss, birch, sand.",
+      "cssVars": {
+        "theme": {
+          "font-sans": "Figtree, ui-sans-serif, system-ui, sans-serif",
+          "font-display": "Newsreader, ui-serif, Georgia, serif",
+          "font-heading": "Newsreader, ui-serif, Georgia, serif",
+          "spacing-section": "5rem",
+          "text-display": "2.5rem"
+        },
+        "light": {
+          "background": "oklch(0.96 0.018 95)",
+          "foreground": "oklch(0.28 0.035 145)",
+          "card": "oklch(0.98 0.01 95)",
+          "card-foreground": "oklch(0.28 0.035 145)",
+          "popover": "oklch(0.98 0.01 95)",
+          "popover-foreground": "oklch(0.28 0.035 145)",
+          "primary": "oklch(0.38 0.05 150)",
+          "primary-foreground": "oklch(0.98 0.01 95)",
+          "secondary": "oklch(0.92 0.02 100)",
+          "secondary-foreground": "oklch(0.28 0.035 145)",
+          "muted": "oklch(0.93 0.016 100)",
+          "muted-foreground": "oklch(0.45 0.03 145)",
+          "accent": "oklch(0.52 0.045 145)",
+          "accent-foreground": "oklch(0.98 0.01 95)",
+          "destructive": "oklch(0.5 0.14 25)",
+          "border": "oklch(0.86 0.02 100)",
+          "input": "oklch(0.86 0.02 100)",
+          "ring": "oklch(0.52 0.045 145)",
+          "radius": "0.3125rem"
+        },
+        "dark": {
+          "background": "oklch(0.24 0.03 145)",
+          "foreground": "oklch(0.96 0.018 95)",
+          "card": "oklch(0.28 0.03 145)",
+          "card-foreground": "oklch(0.96 0.018 95)",
+          "popover": "oklch(0.28 0.03 145)",
+          "popover-foreground": "oklch(0.96 0.018 95)",
+          "primary": "oklch(0.78 0.04 145)",
+          "primary-foreground": "oklch(0.24 0.03 145)",
+          "secondary": "oklch(0.32 0.03 145)",
+          "secondary-foreground": "oklch(0.96 0.018 95)",
+          "muted": "oklch(0.32 0.03 145)",
+          "muted-foreground": "oklch(0.78 0.02 100)",
+          "accent": "oklch(0.62 0.045 145)",
+          "accent-foreground": "oklch(0.24 0.03 145)",
+          "destructive": "oklch(0.65 0.14 25)",
+          "border": "oklch(1 0 0 / 12%)",
+          "input": "oklch(1 0 0 / 14%)",
+          "ring": "oklch(0.62 0.045 145)",
+          "radius": "0.3125rem"
+        }
+      }
+    },
+    {
+      "name": "theme-sharp",
+      "type": "registry:theme",
+      "title": "Sharp theme",
+      "description": "Modern infill. Sans only, high contrast, tight density.",
+      "cssVars": {
+        "theme": {
+          "font-sans": "Geist, ui-sans-serif, system-ui, sans-serif",
+          "font-display": "Geist, ui-sans-serif, system-ui, sans-serif",
+          "font-heading": "Geist, ui-sans-serif, system-ui, sans-serif",
+          "spacing-section": "3.5rem",
+          "text-display": "2.25rem"
+        },
+        "light": {
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.145 0 0)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.145 0 0)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.145 0 0)",
+          "primary": "oklch(0.145 0 0)",
+          "primary-foreground": "oklch(1 0 0)",
+          "secondary": "oklch(0.96 0 0)",
+          "secondary-foreground": "oklch(0.145 0 0)",
+          "muted": "oklch(0.96 0 0)",
+          "muted-foreground": "oklch(0.45 0 0)",
+          "accent": "oklch(0.145 0 0)",
+          "accent-foreground": "oklch(1 0 0)",
+          "destructive": "oklch(0.55 0.18 25)",
+          "border": "oklch(0.9 0 0)",
+          "input": "oklch(0.9 0 0)",
+          "ring": "oklch(0.145 0 0)",
+          "radius": "0.25rem"
+        },
+        "dark": {
+          "background": "oklch(0.145 0 0)",
+          "foreground": "oklch(0.985 0 0)",
+          "card": "oklch(0.205 0 0)",
+          "card-foreground": "oklch(0.985 0 0)",
+          "popover": "oklch(0.205 0 0)",
+          "popover-foreground": "oklch(0.985 0 0)",
+          "primary": "oklch(0.985 0 0)",
+          "primary-foreground": "oklch(0.145 0 0)",
+          "secondary": "oklch(0.269 0 0)",
+          "secondary-foreground": "oklch(0.985 0 0)",
+          "muted": "oklch(0.269 0 0)",
+          "muted-foreground": "oklch(0.708 0 0)",
+          "accent": "oklch(0.985 0 0)",
+          "accent-foreground": "oklch(0.145 0 0)",
+          "destructive": "oklch(0.65 0.18 25)",
+          "border": "oklch(1 0 0 / 10%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.708 0 0)",
+          "radius": "0.25rem"
+        }
+      }
+    },
+    {
+      "name": "schema",
+      "type": "registry:lib",
+      "title": "Content schema",
+      "description": "Community, plan, and ready-home types for Tybow UI blocks.",
+      "files": [
+        {
+          "path": "src/lib/schema.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "flush-photo",
+      "type": "registry:block",
+      "title": "Flush photo",
+      "description": "Full-bleed image, object-cover, no inner mat.",
+      "files": [
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "chapter",
+      "type": "registry:block",
+      "title": "Chapter",
+      "description": "Small eyebrow, one display line, one photo, optional CTA. Layouts: stacked or split. Split may flip photoSide.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/tybow/chapter.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "editorial-block",
+      "type": "registry:block",
+      "title": "Editorial block",
+      "description": "Why this place: big line, short copy, optional photo.",
+      "files": [
+        {
+          "path": "src/components/tybow/editorial-block.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "facts-strip",
+      "type": "registry:block",
+      "title": "Facts strip",
+      "description": "Model address, hours, lot line. Not a card grid.",
+      "files": [
+        {
+          "path": "src/components/tybow/facts-strip.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site-plan",
+      "type": "registry:block",
+      "title": "Site plan",
+      "description": "One large object-contain image and the heading Browse the site plan.",
+      "files": [
+        {
+          "path": "src/components/tybow/site-plan.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-band",
+      "type": "registry:block",
+      "title": "CTA band",
+      "description": "Headline plus Book a tour and Call {phone}. Optional photo band.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/tybow/cta-band.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tour-form",
+      "type": "registry:block",
+      "title": "Tour form",
+      "description": "Name, email, phone, community, plan of interest, message.",
+      "registryDependencies": ["button", "input", "label", "field", "textarea", "select"],
+      "files": [
+        {
+          "path": "src/components/tybow/tour-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tour-dialog",
+      "type": "registry:block",
+      "title": "Tour dialog",
+      "description": "Dialog wrapping the tour form.",
+      "registryDependencies": ["dialog", "button", "input", "label", "field", "textarea", "select"],
+      "files": [
+        {
+          "path": "src/components/tybow/tour-dialog.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/tour-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "collection-story",
+      "type": "registry:block",
+      "title": "Collection story",
+      "description": "Ready-now collection: one intro, one collage, honest paragraph, CTAs. Never a listing grid.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/tybow/collection-story.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "home-story",
+      "type": "registry:block",
+      "title": "Home story",
+      "description": "Single home: title, spec line, paragraph, large photo.",
+      "files": [
+        {
+          "path": "src/components/tybow/home-story.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "communities-nav",
+      "type": "registry:block",
+      "title": "Communities nav",
+      "description": "Dropdown list of communities grouped by status.",
+      "registryDependencies": ["badge"],
+      "files": [
+        {
+          "path": "src/components/tybow/communities-nav.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/lib/schema.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "site-header",
+      "type": "registry:block",
+      "title": "Site header",
+      "description": "Wordmark slot, nav, Call and Book a tour.",
+      "registryDependencies": ["button", "sheet", "separator", "badge"],
+      "files": [
+        {
+          "path": "src/components/tybow/site-header.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/communities-nav.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/lib/schema.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "site-footer",
+      "type": "registry:block",
+      "title": "Site footer",
+      "description": "Phone, email, communities, legal slot.",
+      "files": [
+        {
+          "path": "src/components/tybow/site-footer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/lib/schema.ts",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}

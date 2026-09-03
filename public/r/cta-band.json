@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-band",
+  "title": "CTA band",
+  "description": "Headline plus Book a tour and Call {phone}. Optional photo band.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/tybow/cta-band.tsx",
+      "content": "\"use client\"\n\nimport { Button, buttonVariants } from \"@/components/ui/button\"\nimport { FlushPhoto } from \"@/components/tybow/flush-photo\"\nimport { cn } from \"@/lib/utils\"\n\nexport type CtaBandProps = {\n  id?: string\n  headline: string\n  phone: string\n  onBookTour?: () => void\n  photo?: { src?: string; alt: string }\n}\n\nfunction telHref(phone: string) {\n  return `tel:${phone.replace(/[^\\d+]/g, \"\")}`\n}\n\nexport function CtaBand({\n  id = \"visit\",\n  headline,\n  phone,\n  onBookTour,\n  photo,\n}: CtaBandProps) {\n  const onPhoto = Boolean(photo)\n\n  return (\n    <section\n      id={id}\n      className={cn(\n        \"relative overflow-hidden border-t border-border\",\n        onPhoto ? \"text-primary-foreground\" : \"bg-background\",\n      )}\n    >\n      {photo ? (\n        <>\n          <FlushPhoto\n            src={photo.src}\n            alt={photo.alt}\n            className=\"absolute inset-0 size-full\"\n          />\n          <div className=\"absolute inset-0 bg-primary/80\" />\n        </>\n      ) : null}\n      <div className=\"relative mx-auto flex max-w-[1400px] flex-col gap-8 px-[7vw] py-section md:flex-row md:items-end md:justify-between\">\n        <h2\n          className={cn(\n            \"max-w-[16ch] font-display text-display\",\n            onPhoto ? \"text-primary-foreground\" : \"text-foreground\",\n          )}\n        >\n          {headline}\n        </h2>\n        <div className=\"flex flex-wrap items-center gap-3\">\n          <Button\n            type=\"button\"\n            variant={onPhoto ? \"secondary\" : \"default\"}\n            onClick={onBookTour}\n          >\n            Book a tour\n          </Button>\n          <a\n            href={telHref(phone)}\n            className={buttonVariants({\n              variant: onPhoto ? \"outline\" : \"secondary\",\n            })}\n          >\n            Call {phone}\n          </a>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/tybow/flush-photo.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport type FlushPhotoProps = {\n  src?: string\n  alt: string\n  label?: string\n  fit?: \"cover\" | \"contain\"\n  className?: string\n}\n\nexport function FlushPhoto({\n  src,\n  alt,\n  label = \"replace with client photo\",\n  fit = \"cover\",\n  className,\n}: FlushPhotoProps) {\n  return (\n    <div className={cn(\"relative overflow-hidden bg-muted\", className)}>\n      {src ? (\n        // Parent owns crop and radius. No inner mat.\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={src}\n          alt={alt}\n          className={cn(\n            \"absolute inset-0 size-full\",\n            fit === \"contain\" ? \"object-contain\" : \"object-cover\",\n          )}\n        />\n      ) : (\n        <div\n          className=\"absolute inset-0 flex items-center justify-center bg-muted px-6 text-center\"\n          role=\"img\"\n          aria-label={alt}\n        >\n          <p className=\"text-sm text-muted-foreground\">{label}</p>\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

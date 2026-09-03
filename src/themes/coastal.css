@@ -1,0 +1,27 @@
+[data-theme="coastal"] {
+  --tybow-font-sans: var(--font-figtree), "Figtree", ui-sans-serif, system-ui,
+    sans-serif;
+  --tybow-font-display: var(--font-newsreader), "Newsreader", ui-serif, Georgia,
+    serif;
+  --section-y: 5rem;
+  --display-size: 2.5rem;
+  --radius: 0.3125rem;
+  --background: oklch(0.96 0.018 95);
+  --foreground: oklch(0.28 0.035 145);
+  --card: oklch(0.98 0.01 95);
+  --card-foreground: oklch(0.28 0.035 145);
+  --popover: oklch(0.98 0.01 95);
+  --popover-foreground: oklch(0.28 0.035 145);
+  --primary: oklch(0.38 0.05 150);
+  --primary-foreground: oklch(0.98 0.01 95);
+  --secondary: oklch(0.92 0.02 100);
+  --secondary-foreground: oklch(0.28 0.035 145);
+  --muted: oklch(0.93 0.016 100);
+  --muted-foreground: oklch(0.45 0.03 145);
+  --accent: oklch(0.52 0.045 145);
+  --accent-foreground: oklch(0.98 0.01 95);
+  --destructive: oklch(0.5 0.14 25);
+  --border: oklch(0.86 0.02 100);
+  --input: oklch(0.86 0.02 100);
+  --ring: oklch(0.52 0.045 145);
+}

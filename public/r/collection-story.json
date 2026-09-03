@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collection-story",
+  "title": "Collection story",
+  "description": "Ready-now collection: one intro, one collage, honest paragraph, CTAs. Never a listing grid.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/tybow/collection-story.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { buttonVariants } from \"@/components/ui/button\"\nimport { FlushPhoto } from \"@/components/tybow/flush-photo\"\nimport { cn } from \"@/lib/utils\"\n\nexport type CollectionStoryProps = {\n  id?: string\n  title: string\n  copy: string\n  photo?: { src?: string; alt: string }\n  collage?: { src?: string; alt: string }[]\n  primaryCta?: { href: string; label: string }\n  secondaryCta?: { href: string; label: string }\n}\n\nexport function CollectionStory({\n  id,\n  title,\n  copy,\n  photo,\n  collage,\n  primaryCta,\n  secondaryCta,\n}: CollectionStoryProps) {\n  const frames = (collage ?? (photo ? [photo] : [])).slice(0, 2)\n\n  return (\n    <section id={id} className=\"bg-background\">\n      <div className=\"mx-auto max-w-[760px] px-[7vw] py-section text-center\">\n        {frames.length > 0 ? (\n          <div\n            className={cn(\n              \"grid overflow-hidden rounded-lg\",\n              frames.length === 2 ? \"grid-cols-2 gap-2\" : \"grid-cols-1\",\n            )}\n          >\n            {frames.map((frame) => (\n              <div\n                key={frame.alt}\n                className=\"relative aspect-[16/9] overflow-hidden\"\n              >\n                <FlushPhoto\n                  src={frame.src}\n                  alt={frame.alt}\n                  className=\"absolute inset-0 size-full\"\n                />\n              </div>\n            ))}\n          </div>\n        ) : null}\n        <h2 className=\"mt-10 font-display text-display text-foreground\">\n          {title}\n        </h2>\n        <p className=\"mx-auto mt-5 max-w-xl text-pretty text-foreground\">\n          {copy}\n        </p>\n        {primaryCta || secondaryCta ? (\n          <div className=\"mt-8 flex flex-wrap items-center justify-center gap-3\">\n            {primaryCta ? (\n              <Link href={primaryCta.href} className={buttonVariants()}>\n                {primaryCta.label}\n              </Link>\n            ) : null}\n            {secondaryCta ? (\n              <Link\n                href={secondaryCta.href}\n                className={buttonVariants({ variant: \"outline\" })}\n              >\n                {secondaryCta.label}\n              </Link>\n            ) : null}\n          </div>\n        ) : null}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/tybow/flush-photo.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport type FlushPhotoProps = {\n  src?: string\n  alt: string\n  label?: string\n  fit?: \"cover\" | \"contain\"\n  className?: string\n}\n\nexport function FlushPhoto({\n  src,\n  alt,\n  label = \"replace with client photo\",\n  fit = \"cover\",\n  className,\n}: FlushPhotoProps) {\n  return (\n    <div className={cn(\"relative overflow-hidden bg-muted\", className)}>\n      {src ? (\n        // Parent owns crop and radius. No inner mat.\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={src}\n          alt={alt}\n          className={cn(\n            \"absolute inset-0 size-full\",\n            fit === \"contain\" ? \"object-contain\" : \"object-cover\",\n          )}\n        />\n      ) : (\n        <div\n          className=\"absolute inset-0 flex items-center justify-center bg-muted px-6 text-center\"\n          role=\"img\"\n          aria-label={alt}\n        >\n          <p className=\"text-sm text-muted-foreground\">{label}</p>\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

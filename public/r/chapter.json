@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chapter",
+  "title": "Chapter",
+  "description": "Small eyebrow, one display line, one photo, optional CTA. Layouts: stacked or split. Split may flip photoSide.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/tybow/chapter.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { buttonVariants } from \"@/components/ui/button\"\nimport { FlushPhoto } from \"@/components/tybow/flush-photo\"\nimport { cn } from \"@/lib/utils\"\n\nexport type ChapterProps = {\n  id?: string\n  eyebrow: string\n  line: string\n  photo?: { src?: string; alt: string }\n  cta?: { href: string; label: string }\n  layout?: \"stacked\" | \"split\"\n  /** Split only. Alternate photo side; still one layout, not a third variant. */\n  photoSide?: \"start\" | \"end\"\n}\n\nexport function Chapter({\n  id,\n  eyebrow,\n  line,\n  photo,\n  cta,\n  layout = \"stacked\",\n  photoSide = \"end\",\n}: ChapterProps) {\n  const visual = photo ? (\n    <div\n      className={cn(\n        \"relative overflow-hidden rounded-lg\",\n        layout === \"split\" ? \"aspect-[4/3]\" : \"aspect-[16/9]\",\n        layout === \"split\" && photoSide === \"start\" && \"lg:order-first\",\n      )}\n    >\n      <FlushPhoto\n        src={photo.src}\n        alt={photo.alt}\n        className=\"absolute inset-0 size-full\"\n      />\n    </div>\n  ) : null\n\n  return (\n    <section id={id} className=\"bg-background\">\n      <div\n        className={cn(\n          \"mx-auto max-w-[1400px] px-[7vw] py-section\",\n          layout === \"split\" &&\n            \"grid items-start gap-12 lg:grid-cols-2 lg:gap-20\",\n        )}\n      >\n        <div>\n          <p className=\"text-xs font-bold tracking-[0.04em] text-muted-foreground uppercase\">\n            {eyebrow}\n          </p>\n          <h2 className=\"mt-5 max-w-[16ch] font-display text-display text-foreground\">\n            {line}\n          </h2>\n          {cta ? (\n            <p className=\"mt-10\">\n              <Link\n                href={cta.href}\n                className={buttonVariants({ variant: \"outline\" })}\n              >\n                {cta.label}\n              </Link>\n            </p>\n          ) : null}\n        </div>\n        {layout === \"stacked\" ? (\n          <div className=\"mt-10\">{visual}</div>\n        ) : (\n          visual\n        )}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/tybow/flush-photo.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport type FlushPhotoProps = {\n  src?: string\n  alt: string\n  label?: string\n  fit?: \"cover\" | \"contain\"\n  className?: string\n}\n\nexport function FlushPhoto({\n  src,\n  alt,\n  label = \"replace with client photo\",\n  fit = \"cover\",\n  className,\n}: FlushPhotoProps) {\n  return (\n    <div className={cn(\"relative overflow-hidden bg-muted\", className)}>\n      {src ? (\n        // Parent owns crop and radius. No inner mat.\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={src}\n          alt={alt}\n          className={cn(\n            \"absolute inset-0 size-full\",\n            fit === \"contain\" ? \"object-contain\" : \"object-cover\",\n          )}\n        />\n      ) : (\n        <div\n          className=\"absolute inset-0 flex items-center justify-center bg-muted px-6 text-center\"\n          role=\"img\"\n          aria-label={alt}\n        >\n          <p className=\"text-sm text-muted-foreground\">{label}</p>\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

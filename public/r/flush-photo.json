@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flush-photo",
+  "title": "Flush photo",
+  "description": "Full-bleed image, object-cover, no inner mat.",
+  "files": [
+    {
+      "path": "src/components/tybow/flush-photo.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport type FlushPhotoProps = {\n  src?: string\n  alt: string\n  label?: string\n  fit?: \"cover\" | \"contain\"\n  className?: string\n}\n\nexport function FlushPhoto({\n  src,\n  alt,\n  label = \"replace with client photo\",\n  fit = \"cover\",\n  className,\n}: FlushPhotoProps) {\n  return (\n    <div className={cn(\"relative overflow-hidden bg-muted\", className)}>\n      {src ? (\n        // Parent owns crop and radius. No inner mat.\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={src}\n          alt={alt}\n          className={cn(\n            \"absolute inset-0 size-full\",\n            fit === \"contain\" ? \"object-contain\" : \"object-cover\",\n          )}\n        />\n      ) : (\n        <div\n          className=\"absolute inset-0 flex items-center justify-center bg-muted px-6 text-center\"\n          role=\"img\"\n          aria-label={alt}\n        >\n          <p className=\"text-sm text-muted-foreground\">{label}</p>\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

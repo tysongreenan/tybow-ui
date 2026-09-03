@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "site-footer",
+  "title": "Site footer",
+  "description": "Phone, email, communities, legal slot.",
+  "files": [
+    {
+      "path": "src/components/tybow/site-footer.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport Link from \"next/link\"\n\nimport type { Community } from \"@/lib/schema\"\n\nexport type SiteFooterProps = {\n  builderName: string\n  phone: string\n  email: string\n  communities: Community[]\n  legal?: ReactNode\n  getCommunityHref?: (community: Community) => string\n}\n\nfunction telHref(phone: string) {\n  return `tel:${phone.replace(/[^\\d+]/g, \"\")}`\n}\n\nexport function SiteFooter({\n  builderName,\n  phone,\n  email,\n  communities,\n  legal,\n  getCommunityHref = (community) => `#${community.slug}`,\n}: SiteFooterProps) {\n  return (\n    <footer className=\"border-t border-border bg-muted\">\n      <div className=\"mx-auto grid max-w-[1400px] gap-12 px-[7vw] py-section md:grid-cols-4\">\n        <div className=\"md:col-span-2\">\n          <p className=\"font-display text-lg text-foreground\">{builderName}</p>\n          <p className=\"mt-6 text-sm text-foreground\">\n            <a className=\"hover:underline\" href={telHref(phone)}>\n              {phone}\n            </a>\n            <br />\n            <a className=\"hover:underline\" href={`mailto:${email}`}>\n              {email}\n            </a>\n          </p>\n        </div>\n        <div>\n          <p className=\"text-xs font-bold tracking-[0.04em] text-muted-foreground uppercase\">\n            Communities\n          </p>\n          <ul className=\"mt-4 space-y-3 text-sm\">\n            {communities.map((community) => (\n              <li key={community.slug}>\n                <Link\n                  href={getCommunityHref(community)}\n                  className=\"text-foreground hover:underline\"\n                >\n                  {community.name}\n                </Link>\n                <span className=\"block text-xs text-muted-foreground\">\n                  {community.town}\n                </span>\n              </li>\n            ))}\n          </ul>\n        </div>\n        <div>\n          {legal ? (\n            <div className=\"text-sm text-muted-foreground\">{legal}</div>\n          ) : null}\n        </div>\n      </div>\n    </footer>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/lib/schema.ts",
+      "content": "export type CommunityStatus =\n  | \"available\"\n  | \"selling\"\n  | \"sold-out\"\n  | \"coming-soon\"\n\nexport type Community = {\n  slug: string\n  name: string\n  town: string\n  status: CommunityStatus\n  oneLiner: string\n  modelAddress?: string\n  hours?: string\n  lotLine?: string\n  hero?: { src: string; alt: string }\n  sitePlan?: { src: string; alt: string }\n}\n\nexport type Plan = {\n  slug: string\n  communitySlug: string\n  name: string\n  beds?: number\n  baths?: number\n  sqft?: number\n  image?: { src: string; alt: string }\n}\n\nexport type ReadyHome = {\n  slug: string\n  name: string\n  communitySlug?: string\n  specLine: string\n  summary: string\n  photo?: { src: string; alt: string }\n}\n\nexport type SiteContent = {\n  builderName: string\n  phone: string\n  email: string\n  communities: Community[]\n  plans: Plan[]\n  readyHomes: ReadyHome[]\n}\n\nexport const communityStatusLabel: Record<CommunityStatus, string> = {\n  available: \"Available\",\n  selling: \"Selling\",\n  \"sold-out\": \"Sold out\",\n  \"coming-soon\": \"Coming soon\",\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:block"
+}

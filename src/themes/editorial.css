@@ -1,0 +1,28 @@
+:root,
+[data-theme="editorial"] {
+  --tybow-font-sans: var(--font-source-sans), "Source Sans 3", ui-sans-serif,
+    system-ui, sans-serif;
+  --tybow-font-display: var(--font-fraunces), "Fraunces", ui-serif, Georgia,
+    serif;
+  --section-y: 6.5rem;
+  --display-size: 3rem;
+  --radius: 0.75rem;
+  --background: oklch(0.975 0.01 85);
+  --foreground: oklch(0.22 0.02 50);
+  --card: oklch(0.99 0.005 85);
+  --card-foreground: oklch(0.22 0.02 50);
+  --popover: oklch(0.99 0.005 85);
+  --popover-foreground: oklch(0.22 0.02 50);
+  --primary: oklch(0.22 0.02 50);
+  --primary-foreground: oklch(0.975 0.01 85);
+  --secondary: oklch(0.94 0.012 80);
+  --secondary-foreground: oklch(0.22 0.02 50);
+  --muted: oklch(0.94 0.012 80);
+  --muted-foreground: oklch(0.45 0.02 55);
+  --accent: oklch(0.55 0.035 70);
+  --accent-foreground: oklch(0.98 0.008 85);
+  --destructive: oklch(0.55 0.16 25);
+  --border: oklch(0.88 0.015 80);
+  --input: oklch(0.88 0.015 80);
+  --ring: oklch(0.55 0.035 70);
+}

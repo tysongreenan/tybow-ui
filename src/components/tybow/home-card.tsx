@@ -1,14 +1,11 @@
 "use client"
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
+import { useEffect, useRef, useState } from "react"
+
+import "./tybow-motion.css"
+
 import { ArrowButton } from "@/components/tybow/arrow-button"
-import { FlushPhoto } from "@/components/tybow/flush-photo"
+import { MediaStack } from "@/components/tybow/flush-photo"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -59,6 +56,50 @@ export function HomeCard({
   onSecondary,
   className,
 }: HomeCardProps) {
+  const [on, setOn] = useState(0)
+  const [restartKey, setRestartKey] = useState(0)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const timerRef = useRef<number | null>(null)
+  const current = photos[on]
+
+  function go(n: number) {
+    if (!photos.length) return
+    setOn((n + photos.length) % photos.length)
+    setRestartKey((key) => key + 1)
+  }
+
+  useEffect(() => {
+    if (photos.length < 2) return
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const root = rootRef.current
+
+    function stop() {
+      if (timerRef.current) window.clearInterval(timerRef.current)
+      timerRef.current = null
+    }
+
+    function restart() {
+      stop()
+      if (reduce) return
+      timerRef.current = window.setInterval(() => {
+        setOn((i) => (i + 1) % photos.length)
+      }, 5200)
+    }
+
+    restart()
+    if (!root) return () => stop()
+
+    const onEnter = () => stop()
+    const onLeave = () => restart()
+    root.addEventListener("mouseenter", onEnter)
+    root.addEventListener("mouseleave", onLeave)
+    return () => {
+      stop()
+      root.removeEventListener("mouseenter", onEnter)
+      root.removeEventListener("mouseleave", onLeave)
+    }
+  }, [photos.length, restartKey])
+
   return (
     <article
       id={id}
@@ -67,30 +108,42 @@ export function HomeCard({
         className,
       )}
     >
-      <Carousel className="relative min-h-[18rem] overflow-hidden bg-muted lg:min-h-[28rem]">
-        <CarouselContent className="ml-0">
-          {photos.map((photo, index) => (
-            <CarouselItem key={`${photo.alt}-${index}`} className="relative min-h-[18rem] pl-0 lg:min-h-[28rem]">
-              <FlushPhoto
-                src={photo.src}
-                alt={photo.alt}
-                className="absolute inset-0 size-full"
-              />
-              {photo.label ? (
-                <span className="absolute bottom-4 left-4 bg-foreground/70 px-3 py-1 text-[0.65rem] tracking-[0.16em] text-primary-foreground uppercase">
-                  {photo.label}
-                </span>
-              ) : null}
-            </CarouselItem>
-          ))}
-        </CarouselContent>
+      <div
+        ref={rootRef}
+        className="relative min-h-[18rem] overflow-hidden bg-muted lg:min-h-[28rem]"
+      >
+        <MediaStack
+          frames={photos}
+          on={on}
+          slideClassName="tybow-overview-slide"
+          className="absolute inset-0 size-full"
+        />
+        {current?.label ? (
+          <span className="absolute bottom-4 left-4 z-[2] bg-foreground/70 px-3 py-1 text-[0.65rem] tracking-[0.16em] text-primary-foreground uppercase">
+            {current.label}
+          </span>
+        ) : null}
         {photos.length > 1 ? (
           <>
-            <CarouselPrevious className="left-3 rounded-none border-0 bg-background/80" />
-            <CarouselNext className="right-3 rounded-none border-0 bg-background/80" />
+            <button
+              type="button"
+              aria-label="Previous image"
+              className="absolute top-1/2 left-3 z-[3] grid size-[2.4rem] -translate-y-1/2 place-items-center border border-primary-foreground/45 bg-foreground/45 text-[1.35rem] text-primary-foreground"
+              onClick={() => go(on - 1)}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              aria-label="Next image"
+              className="absolute top-1/2 right-3 z-[3] grid size-[2.4rem] -translate-y-1/2 place-items-center border border-primary-foreground/45 bg-foreground/45 text-[1.35rem] text-primary-foreground"
+              onClick={() => go(on + 1)}
+            >
+              ›
+            </button>
           </>
         ) : null}
-      </Carousel>
+      </div>
       <div className="flex flex-col justify-center border border-border p-6 lg:border-l-0">
         <p className="text-[0.7rem] font-semibold tracking-[0.16em] text-primary uppercase">
           {eyebrow}

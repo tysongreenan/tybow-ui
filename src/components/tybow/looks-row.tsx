@@ -1,4 +1,11 @@
+"use client"
+
+import { useState } from "react"
+
+import "./tybow-motion.css"
+
 import { FlushPhoto } from "@/components/tybow/flush-photo"
+import { cn } from "@/lib/utils"
 
 export type LooksRowItem = {
   name: string
@@ -21,6 +28,8 @@ export function LooksRow({
   copy,
   looks,
 }: LooksRowProps) {
+  const [on, setOn] = useState(0)
+
   return (
     <section id={id} className="bg-background px-[7vw] py-section">
       {eyebrow ? (
@@ -32,25 +41,38 @@ export function LooksRow({
         {title}
       </h2>
       <p className="mt-4 max-w-[46rem] text-pretty text-foreground">{copy}</p>
-      <ul className="mt-10 flex gap-3 overflow-x-auto pb-2">
-        {looks.map((look) => (
-          <li key={look.name} className="w-[11.5rem] shrink-0">
-            <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+      <div className="tybow-gallery mt-10" role="list">
+        {looks.map((look, index) => (
+          <button
+            key={look.name}
+            type="button"
+            role="listitem"
+            aria-pressed={index === on}
+            className={cn("tybow-gallery-item", index === on && "is-active")}
+            onMouseEnter={() => setOn(index)}
+            onFocus={() => setOn(index)}
+            onClick={() => setOn(index)}
+          >
+            {look.photo?.src ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={look.photo.src}
+                alt={look.photo.alt}
+                decoding="async"
+                className="tybow-gallery-frame"
+              />
+            ) : (
               <FlushPhoto
                 src={look.photo?.src}
                 alt={look.photo?.alt ?? look.name}
-                className="absolute inset-0 size-full"
+                className="tybow-gallery-frame"
               />
-            </div>
-            <p className="mt-2 text-[0.7rem] font-semibold tracking-[0.12em] text-foreground uppercase">
-              {look.name}
-            </p>
-            <p className="text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase">
-              {look.line}
-            </p>
-          </li>
+            )}
+            <span className="tybow-gallery-spine">{look.name}</span>
+            <span className="tybow-gallery-cap">{look.line}</span>
+          </button>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }

@@ -1,0 +1,332 @@
+/* Motion ported from The Pines: wh-pines.css + wh-pe-brand.css.
+   Token-only. Values (timings, easings, travel) stay literal. */
+
+@keyframes tybow-pull {
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.tybow-pull {
+  display: inline-block;
+  transform: translateY(0.42em);
+  opacity: 0;
+  animation: tybow-pull 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+}
+
+.tybow-pull-late {
+  transform: translateY(0.8rem);
+  opacity: 0;
+  animation: tybow-pull 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Ken Burns lives on the IMG, not a wrapper. */
+.tybow-hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 52%;
+  opacity: 0;
+  transform: scale(1.02);
+  transition:
+    opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.tybow-hero-slide.is-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tybow-look-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tybow-look-slide.is-on {
+  opacity: 1;
+}
+
+.tybow-overview-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tybow-overview-slide.is-on {
+  opacity: 1;
+  z-index: 1;
+}
+
+.tybow-gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  width: 100%;
+  height: min(56vh, 32rem);
+  min-height: 22rem;
+  overflow: hidden;
+  background: var(--foreground);
+}
+
+.tybow-gallery-item {
+  position: relative;
+  overflow: hidden;
+  flex: 0.5 1 2.55rem;
+  min-width: 2.45rem;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--foreground);
+  cursor: pointer;
+  text-align: left;
+  line-height: 0;
+  transition: flex-grow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tybow-gallery-item.is-active {
+  flex-grow: 16;
+}
+
+.tybow-gallery-item img,
+.tybow-gallery-item .tybow-gallery-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 48%;
+}
+
+.tybow-gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    color-mix(in oklch, var(--foreground) 88%, transparent) 0%,
+    color-mix(in oklch, var(--foreground) 62%, transparent) 55%,
+    color-mix(in oklch, var(--foreground) 28%, transparent) 100%
+  );
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.tybow-gallery-item.is-active::after {
+  opacity: 0;
+}
+
+.tybow-gallery-spine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 1.05rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-foreground);
+  text-shadow: 0 1px 12px color-mix(in oklch, var(--foreground) 70%, transparent);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.tybow-gallery-item.is-active .tybow-gallery-spine {
+  opacity: 0;
+}
+
+.tybow-gallery-cap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  padding: 2.6rem 1.2rem 1.05rem;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklch, var(--foreground) 70%, transparent),
+    transparent
+  );
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary-foreground);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.tybow-gallery-item.is-active .tybow-gallery-cap {
+  opacity: 1;
+  transform: none;
+}
+
+.tybow-deck-card-body,
+.tybow-deck-card::after {
+  transition:
+    opacity 420ms ease,
+    transform 420ms ease;
+}
+
+.tybow-deck-track .tybow-deck-card:not(.is-active) .tybow-deck-card-body {
+  opacity: 0.55;
+  transform: translateY(10px);
+}
+
+.tybow-spec-line {
+  --pin-line-delay: 0ms;
+}
+
+.tybow-spec-line::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--border);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tybow-spec .tybow-spec-line::after {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 620ms cubic-bezier(0.23, 1, 0.32, 1)
+      var(--pin-line-delay, 0ms);
+  }
+
+  .tybow-spec .tybow-spec-tick {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition:
+      opacity 420ms cubic-bezier(0.23, 1, 0.32, 1) var(--pin-line-delay, 0ms),
+      transform 420ms cubic-bezier(0.23, 1, 0.32, 1) var(--pin-line-delay, 0ms);
+  }
+
+  .tybow-spec.is-inview .tybow-spec-line::after {
+    transform: scaleX(1);
+  }
+
+  .tybow-spec.is-inview .tybow-spec-tick {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tybow-spec-line:nth-child(1) {
+    --pin-line-delay: 300ms;
+  }
+  .tybow-spec-line:nth-child(2) {
+    --pin-line-delay: 375ms;
+  }
+  .tybow-spec-line:nth-child(3) {
+    --pin-line-delay: 450ms;
+  }
+  .tybow-spec-line:nth-child(4) {
+    --pin-line-delay: 525ms;
+  }
+  .tybow-spec-line:nth-child(5) {
+    --pin-line-delay: 600ms;
+  }
+  .tybow-spec-line:nth-child(6) {
+    --pin-line-delay: 675ms;
+  }
+}
+
+@media (max-width: 800px) {
+  .tybow-gallery {
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .tybow-gallery-item {
+    flex: 0 0 2.65rem;
+    width: 100%;
+    min-width: 0;
+    height: 2.65rem;
+    transition:
+      height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      flex-basis 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tybow-gallery-item.is-active {
+    flex: 0 0 22rem;
+    height: 22rem;
+  }
+
+  .tybow-gallery-item::after {
+    background: linear-gradient(
+      to top,
+      color-mix(in oklch, var(--foreground) 88%, transparent) 0%,
+      color-mix(in oklch, var(--foreground) 45%, transparent) 70%,
+      transparent 100%
+    );
+  }
+
+  .tybow-gallery-spine {
+    writing-mode: horizontal-tb;
+    transform: none;
+    inset: auto auto 0.7rem 0.9rem;
+    padding: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (max-width: 959px) {
+  .tybow-deck-track .tybow-deck-card:not(.is-active) .tybow-deck-card-body {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tybow-pull,
+  .tybow-pull-late {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .tybow-hero-slide,
+  .tybow-hero-slide.is-on,
+  .tybow-look-slide,
+  .tybow-overview-slide,
+  .tybow-gallery-item,
+  .tybow-gallery-item::after,
+  .tybow-gallery-spine,
+  .tybow-gallery-cap,
+  .tybow-deck-card-body,
+  .tybow-deck-card::after {
+    transition: none;
+    transform: none;
+  }
+
+  .tybow-deck-track .tybow-deck-card:not(.is-active) .tybow-deck-card-body {
+    opacity: 1;
+    transform: none;
+  }
+}

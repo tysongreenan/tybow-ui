@@ -4,6 +4,7 @@
 @import "../themes/editorial.css";
 @import "../themes/coastal.css";
 @import "../themes/sharp.css";
+@import "../components/tybow/tybow-motion.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -110,3 +111,5 @@
     font-weight: 500;
   }
 }
+
+

@@ -85,6 +85,9 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
           line={cedar.name}
           copy="Fully finished homes. Each one released complete."
           photo={cedar.hero}
+          photos={[cedar.hero, millbrook.hero, pasture.hero].filter(
+            (item): item is NonNullable<typeof item> => Boolean(item),
+          )}
           cta={{ href: "#contact", label: "Book a private tour" }}
           secondaryCta={{ href: "#contact", label: "Join the list" }}
           layout="stacked"
@@ -161,6 +164,23 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
             "Ensuite glass shower",
           ]}
           photo={millbrook.hero}
+          photos={[
+            {
+              ...(millbrook.hero ?? { alt: millbrook.name }),
+              name: millbrook.name,
+              tag: "Kitchen",
+            },
+            {
+              ...(cedar.hero ?? { alt: cedar.name }),
+              name: cedar.name,
+              tag: "Street",
+            },
+            {
+              ...(pasture.hero ?? { alt: pasture.name }),
+              name: pasture.name,
+              tag: "Place",
+            },
+          ]}
           cta={{ href: "#contact", label: "Book a private preview" }}
           note="Final specification confirmed at your appointment."
         />
@@ -185,6 +205,11 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
               title: "Chosen",
               line: "All the taste, none of the spiral.",
               photo: pasture.hero,
+            },
+            {
+              title: "The same standard",
+              line: "The scale changed. The build did not.",
+              photo: home.photo,
             },
           ]}
         />

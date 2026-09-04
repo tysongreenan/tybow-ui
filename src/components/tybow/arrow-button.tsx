@@ -33,10 +33,10 @@ export function ArrowButton({
   const classes = cn(
     "inline-flex min-h-[3.25rem] items-center gap-3 pr-1.5 pl-5 font-sans text-[0.92rem] font-semibold tracking-[0.04em] uppercase",
     variant === "cream" &&
-      "bg-primary-foreground text-foreground shadow-[0_10px_28px_color-mix(in_oklch,var(--foreground)_32%,transparent)]",
-    variant === "inverse" && "bg-primary text-primary-foreground",
+      "bg-primary-foreground text-foreground shadow-[0_10px_28px_color-mix(in_oklch,var(--foreground)_32%,transparent)] hover:bg-white",
+    variant === "inverse" && "bg-primary text-primary-foreground hover:brightness-90",
     variant === "ghost" &&
-      "min-h-[3.25rem] border-[1.5px] border-primary-foreground bg-foreground/60 px-5 text-primary-foreground",
+      "min-h-[3.25rem] border-[1.5px] border-primary-foreground bg-foreground/60 px-5 text-primary-foreground hover:border-white hover:bg-foreground/80",
     className,
   )
 

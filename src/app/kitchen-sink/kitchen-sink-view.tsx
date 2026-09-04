@@ -7,6 +7,9 @@ import { Chapter } from "@/components/tybow/chapter"
 import { CollectionStory } from "@/components/tybow/collection-story"
 import { EditorialBlock } from "@/components/tybow/editorial-block"
 import { FlushPhoto } from "@/components/tybow/flush-photo"
+import { HomeCard } from "@/components/tybow/home-card"
+import { HomeStory } from "@/components/tybow/home-story"
+import { LooksCarousel } from "@/components/tybow/looks-carousel"
 import { LooksRow } from "@/components/tybow/looks-row"
 import { PreviewSteps } from "@/components/tybow/preview-steps"
 import { SiteFooter } from "@/components/tybow/site-footer"
@@ -21,7 +24,7 @@ import { cn } from "@/lib/utils"
 const nav = [
   { href: "#looks", label: "The look" },
   { href: "#community", label: "Finished" },
-  { href: "#plans", label: "Plans" },
+  { href: "#homes", label: "Homes" },
   { href: "#contact", label: "Contact" },
 ]
 
@@ -88,8 +91,33 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
           tone="flush"
         />
 
-        <LooksRow
+        <LooksCarousel
           id="looks"
+          eyebrow="You buy what you see"
+          title="Eight designs. One decision."
+          copy="There is no upgrade sheet and no exterior customization later. Every elevation, material and finish is specified and priced into the home."
+          cta={{ href: "#homes", label: "View the collection" }}
+          slides={[
+            {
+              name: willow.name,
+              tag: "Colour look · warm clay",
+              photo: willow.image ?? { alt: willow.name },
+            },
+            {
+              name: ash.name,
+              tag: "Stone arch",
+              photo: ash.image ?? { alt: ash.name },
+            },
+            {
+              name: home.name,
+              tag: "Craftsman",
+              photo: home.photo ?? { alt: home.name },
+            },
+          ]}
+        />
+
+        <LooksRow
+          id="looks-row"
           eyebrow="Available home designs"
           title="Stucco, stone and long windows"
           copy="Different silhouettes. The same finish. This is a looks row, not a listing grid."
@@ -159,6 +187,42 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
               photo: pasture.hero,
             },
           ]}
+        />
+
+        <section id="homes" className="space-y-10 bg-background px-[7vw] py-section">
+          <HomeCard
+            eyebrow={`${cedar.name} · ${cedar.town} · bungalow`}
+            title={willow.name}
+            price="From $890,000"
+            sqft="2,140"
+            beds="3"
+            baths="2.5"
+            garage="2-car"
+            photos={[
+              { ...(willow.image ?? { alt: willow.name }), label: "Exterior" },
+              { ...(cedar.hero ?? { alt: cedar.name }), label: "Street" },
+            ]}
+            primaryCta={{ href: `#${home.slug}`, label: "Ask about this home" }}
+            secondaryCta={{ href: "#contact", label: "Add to compare" }}
+          />
+        </section>
+
+        <HomeStory
+          id={home.slug}
+          eyebrow={`${cedar.name} · ${cedar.town}`}
+          title={home.name}
+          specLine={home.specLine}
+          summary={home.summary}
+          photo={home.photo}
+          sqft="2,140"
+          beds="3"
+          baths="2.5"
+          garage="2-car"
+          photos={[
+            { ...(home.photo ?? { alt: home.name }), label: "Exterior" },
+            { ...(millbrook.hero ?? { alt: millbrook.name }), label: "Kitchen" },
+          ]}
+          onAsk={() => setTourOpen(true)}
         />
 
         <PreviewSteps

@@ -46,7 +46,7 @@ Writes `public/r/*.json`, including `public/r/registry.json`.
 
 ## Blocks
 
-`chapter` (stacked \| split), `editorial-block`, `facts-strip`, `flush-photo`, `site-plan`, `cta-band`, `tour-form`, `tour-dialog`, `collection-story`, `home-story`, `communities-nav`, `site-header`, `site-footer`.
+`chapter` (stacked \| split, paper \| flush), `looks-carousel`, `looks-row`, `editorial-block` (decided split), `collection-story` (why-deck), `home-card`, `home-story`, `preview-steps`, `site-plan`, `arrow-button`, `cta-band`, `tour-form`, `tour-dialog`, `communities-nav`, `site-header`, `site-footer`.
 
 Do not invent a realtor listing-card grid.
 

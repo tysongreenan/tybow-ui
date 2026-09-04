@@ -210,6 +210,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/tybow/arrow-button.tsx",
+          "type": "registry:ui"
+        },
+        {
           "path": "src/components/tybow/flush-photo.tsx",
           "type": "registry:component"
         }
@@ -286,6 +290,10 @@
         {
           "path": "src/components/tybow/tour-form.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/arrow-button.tsx",
+          "type": "registry:ui"
         }
       ]
     },
@@ -316,6 +324,56 @@
         {
           "path": "src/components/tybow/collection-story.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "arrow-button",
+      "type": "registry:ui",
+      "title": "Arrow button",
+      "description": "Pines CTA: label plus a square arrow tile. Cream, inverse, or ghost.",
+      "files": [
+        {
+          "path": "src/components/tybow/arrow-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "looks-carousel",
+      "type": "registry:block",
+      "title": "Looks carousel",
+      "description": "Copy beside a large elevation carousel with arrows and a name overlay.",
+      "registryDependencies": ["button", "carousel"],
+      "files": [
+        {
+          "path": "src/components/tybow/looks-carousel.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "home-card",
+      "type": "registry:block",
+      "title": "Home card",
+      "description": "Property card: photo carousel, spec grid, two CTAs. Not a 3-up listing grid.",
+      "registryDependencies": ["button", "carousel"],
+      "files": [
+        {
+          "path": "src/components/tybow/home-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/arrow-button.tsx",
+          "type": "registry:ui"
         },
         {
           "path": "src/components/tybow/flush-photo.tsx",
@@ -357,10 +415,19 @@
       "type": "registry:block",
       "title": "Home story",
       "description": "Single home: title, spec line, paragraph, large photo.",
+      "registryDependencies": ["button", "carousel"],
       "files": [
         {
           "path": "src/components/tybow/home-story.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/home-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/arrow-button.tsx",
+          "type": "registry:ui"
         },
         {
           "path": "src/components/tybow/flush-photo.tsx",

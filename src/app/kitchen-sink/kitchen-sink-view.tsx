@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { Chapter } from "@/components/tybow/chapter"
 import { CollectionStory } from "@/components/tybow/collection-story"
 import { CtaBand } from "@/components/tybow/cta-band"
@@ -21,7 +20,6 @@ import { tybowThemes, type TybowTheme } from "@/lib/themes"
 import { cn } from "@/lib/utils"
 
 const nav = [
-  { href: "#home", label: "Home" },
   { href: "#community", label: "Community" },
   { href: "#plans", label: "Plans" },
   { href: "#ready-now", label: "Ready now" },
@@ -32,7 +30,6 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
   const [tourOpen, setTourOpen] = React.useState(false)
   const cedar = sampleContent.communities[0]
   const millbrook = sampleContent.communities[1]
-  const pasture = sampleContent.communities[2]
   const home = sampleContent.readyHomes[0]
 
   React.useEffect(() => {
@@ -48,27 +45,23 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
         plans={sampleContent.plans}
       />
 
-      <div className="border-b border-border bg-muted">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3 px-4 py-3 md:px-6">
-          <p className="font-display text-sm text-foreground">Tybow UI</p>
-          <nav aria-label="Theme" className="flex items-center gap-1">
-            {tybowThemes.map((item) => (
-              <Link
-                key={item}
-                href={`/kitchen-sink?theme=${item}`}
-                aria-current={theme === item ? "page" : undefined}
-                className={cn(
-                  "rounded-lg px-3 py-1.5 text-sm capitalize",
-                  theme === item
-                    ? "bg-primary text-primary-foreground"
-                    : "text-foreground hover:bg-background",
-                )}
-              >
-                {item}
-              </Link>
-            ))}
-          </nav>
-        </div>
+      <div className="fixed top-3 right-3 z-[60] flex items-center gap-1 rounded-lg bg-background/90 p-1 shadow-sm ring-1 ring-foreground/10 backdrop-blur">
+        <span className="sr-only">Tybow UI theme</span>
+        {tybowThemes.map((item) => (
+          <Link
+            key={item}
+            href={`/kitchen-sink?theme=${item}`}
+            aria-current={theme === item ? "page" : undefined}
+            className={cn(
+              "rounded-lg px-2.5 py-1 text-xs capitalize",
+              theme === item
+                ? "bg-primary text-primary-foreground"
+                : "text-foreground hover:bg-muted",
+            )}
+          >
+            {item}
+          </Link>
+        ))}
       </div>
 
       <SiteHeader
@@ -78,73 +71,41 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
         nav={nav}
         onBookTour={() => setTourOpen(true)}
         getCommunityHref={(community) => `#${community.slug}`}
+        overlay
       />
 
       <main>
-        <section id="home" className="bg-background">
-          <div className="mx-auto max-w-[1400px] px-[7vw] pt-section">
-            <p className="text-xs font-bold tracking-[0.04em] text-muted-foreground uppercase">
-              Home
-            </p>
-            <h1 className="mt-4 max-w-[16ch] font-display text-display text-foreground">
-              Tybow UI
-            </h1>
-            <p className="mt-4 max-w-xl text-muted-foreground">
-              Same blocks. Three skins. Query param{" "}
-              <code className="text-foreground">?theme={theme}</code>.
-            </p>
-          </div>
-        </section>
-
         <Chapter
-          id={cedar.slug}
-          eyebrow={cedar.name}
-          line={cedar.oneLiner}
+          id="home"
+          eyebrow={`Coming soon · ${cedar.town}`}
+          line={cedar.name}
+          copy={cedar.oneLiner}
           photo={cedar.hero}
-          cta={{ href: "#community", label: `View ${cedar.name}` }}
+          cta={{ href: "#contact", label: "Book a tour" }}
           layout="stacked"
-        />
-        <Chapter
-          id={millbrook.slug}
-          eyebrow={millbrook.name}
-          line={millbrook.oneLiner}
-          photo={millbrook.hero}
-          cta={{ href: "#community", label: `View ${millbrook.name}` }}
-          layout="split"
-        />
-        <Chapter
-          id={pasture.slug}
-          eyebrow={pasture.name}
-          line={pasture.oneLiner}
-          photo={pasture.hero}
-          cta={{ href: "#community", label: `View ${pasture.name}` }}
-          layout="split"
-          photoSide="start"
+          tone="flush"
         />
 
         <section id="community">
           <EditorialBlock
-            eyebrow={`${cedar.name} · ${cedar.town}`}
-            title={cedar.oneLiner}
-            copy="A community page is an editorial block, a facts strip, and a published site plan. Not a listing grid."
-            photo={cedar.hero}
+            eyebrow="The look"
+            title="Stone, stucco, and long windows."
+            copy="A community page is type on a photograph, then an honest block, a facts strip, and a published site plan. Not a magazine column and not a listing grid."
           />
-          <div className="mx-auto max-w-[1100px] px-[7vw] pb-section">
+          <div className="relative h-[70vh] min-h-[28rem] w-full overflow-hidden">
+            <FlushPhoto
+              src={millbrook.hero?.src}
+              alt={millbrook.hero?.alt ?? "replace with client photo"}
+              className="absolute inset-0 size-full"
+            />
+          </div>
+          <div className="mx-auto max-w-[1100px] px-[7vw] py-section">
             <FactsStrip
               modelAddress={cedar.modelAddress}
               hours={cedar.hours}
               lotLine={cedar.lotLine}
             />
           </div>
-          {theme === "coastal" ? (
-            <div className="relative h-64 w-full overflow-hidden md:h-80">
-              <FlushPhoto
-                src={cedar.hero?.src}
-                alt={cedar.hero?.alt ?? "replace with client photo"}
-                className="absolute inset-0 size-full"
-              />
-            </div>
-          ) : null}
           <SitePlan
             src={cedar.sitePlan?.src}
             alt={cedar.sitePlan?.alt}
@@ -154,7 +115,7 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
 
         <section id="plans" className="bg-background">
           <div className="mx-auto max-w-[1100px] px-[7vw] py-section">
-            <p className="text-xs font-bold tracking-[0.04em] text-muted-foreground uppercase">
+            <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
               Plans
             </p>
             <h2 className="mt-4 font-display text-display text-foreground">
@@ -177,7 +138,7 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
         <section id="ready-now">
           <CollectionStory
             title={`${sampleContent.readyHomes.length} homes ready now`}
-            copy="One intro, one collage, an honest paragraph, and the next step. Not a three-up listing grid."
+            copy="One intro, one collage, an honest paragraph, and the next step. Never a three-up listing grid."
             collage={sampleContent.readyHomes
               .map((item) => item.photo)
               .filter((item): item is NonNullable<typeof item> => Boolean(item))}
@@ -200,7 +161,7 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
             onBookTour={() => setTourOpen(true)}
             photo={cedar.hero}
           />
-          <div className="mx-auto flex max-w-[1400px] justify-center px-[7vw] pb-section">
+          <div className="mx-auto flex max-w-[1400px] justify-center px-[7vw] py-10">
             <Button type="button" onClick={() => setTourOpen(true)}>
               Open tour dialog
             </Button>
@@ -208,7 +169,6 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
         </section>
       </main>
 
-      <Separator />
       <SiteFooter
         builderName={sampleContent.builderName}
         phone={sampleContent.phone}

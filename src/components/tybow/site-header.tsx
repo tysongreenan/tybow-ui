@@ -1,6 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -14,6 +15,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { CommunitiesNav } from "@/components/tybow/communities-nav"
 import type { Community } from "@/lib/schema"
+import { cn } from "@/lib/utils"
 
 export type SiteHeaderLink = {
   href: string
@@ -27,6 +29,7 @@ export type SiteHeaderProps = {
   nav?: SiteHeaderLink[]
   onBookTour?: () => void
   getCommunityHref?: (community: Community) => string
+  overlay?: boolean
 }
 
 function telHref(phone: string) {
@@ -40,12 +43,40 @@ export function SiteHeader({
   nav = [],
   onBookTour,
   getCommunityHref,
+  overlay = false,
 }: SiteHeaderProps) {
+  const [scrolled, setScrolled] = useState(false)
+  const overPhoto = overlay && !scrolled
+
+  useEffect(() => {
+    if (!overlay) {
+      return
+    }
+    function onScroll() {
+      setScrolled(window.scrollY > 24)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [overlay])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b transition-colors",
+        overPhoto
+          ? "border-transparent bg-transparent"
+          : "border-border bg-background",
+      )}
+    >
       <div className="mx-auto flex min-h-16 max-w-[1600px] items-center justify-between gap-4 px-4 py-3 md:px-6">
         <div className="flex min-w-0 items-center gap-8">
-          <div className="font-display text-lg tracking-tight text-foreground">
+          <div
+            className={cn(
+              "font-display text-lg tracking-tight",
+              overPhoto ? "text-primary-foreground" : "text-foreground",
+            )}
+          >
             {wordmark}
           </div>
           <nav
@@ -56,7 +87,12 @@ export function SiteHeader({
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium tracking-[0.08em] text-muted-foreground uppercase hover:text-foreground"
+                className={cn(
+                  "text-sm font-medium tracking-[0.12em] uppercase",
+                  overPhoto
+                    ? "text-primary-foreground/80 hover:text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
               >
                 {item.label}
               </Link>
@@ -64,6 +100,9 @@ export function SiteHeader({
             <CommunitiesNav
               communities={communities}
               getHref={getCommunityHref}
+              className={
+                overPhoto ? "text-primary-foreground" : "text-muted-foreground"
+              }
             />
           </nav>
         </div>
@@ -71,20 +110,31 @@ export function SiteHeader({
         <div className="flex shrink-0 items-center gap-3">
           <a
             href={telHref(phone)}
-            className={buttonVariants({ variant: "outline" })}
+            className={buttonVariants({
+              variant: "outline",
+              className: overPhoto
+                ? "border-primary-foreground/70 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                : undefined,
+            })}
           >
             Call {phone}
           </a>
           <Button
             type="button"
             className="hidden xl:inline-flex"
+            variant={overPhoto ? "secondary" : "default"}
             onClick={onBookTour}
           >
             Book a tour
           </Button>
           <Sheet>
             <SheetTrigger
-              className={buttonVariants({ variant: "ghost" })}
+              className={buttonVariants({
+                variant: "ghost",
+                className: overPhoto
+                  ? "text-primary-foreground hover:bg-primary-foreground/10"
+                  : undefined,
+              })}
               aria-label="Open menu"
             >
               Menu

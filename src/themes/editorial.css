@@ -1,28 +1,29 @@
 :root,
 [data-theme="editorial"] {
-  --tybow-font-sans: var(--font-source-sans), "Source Sans 3", ui-sans-serif,
+  --tybow-font-sans: var(--font-montserrat), "Montserrat", ui-sans-serif,
     system-ui, sans-serif;
-  --tybow-font-display: var(--font-fraunces), "Fraunces", ui-serif, Georgia,
-    serif;
-  --section-y: 6.5rem;
-  --display-size: 3rem;
-  --radius: 0.75rem;
-  --background: oklch(0.975 0.01 85);
-  --foreground: oklch(0.22 0.02 50);
-  --card: oklch(0.99 0.005 85);
-  --card-foreground: oklch(0.22 0.02 50);
-  --popover: oklch(0.99 0.005 85);
-  --popover-foreground: oklch(0.22 0.02 50);
-  --primary: oklch(0.22 0.02 50);
-  --primary-foreground: oklch(0.975 0.01 85);
-  --secondary: oklch(0.94 0.012 80);
-  --secondary-foreground: oklch(0.22 0.02 50);
-  --muted: oklch(0.94 0.012 80);
-  --muted-foreground: oklch(0.45 0.02 55);
-  --accent: oklch(0.55 0.035 70);
-  --accent-foreground: oklch(0.98 0.008 85);
-  --destructive: oklch(0.55 0.16 25);
-  --border: oklch(0.88 0.015 80);
-  --input: oklch(0.88 0.015 80);
-  --ring: oklch(0.55 0.035 70);
+  --tybow-font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif,
+    Georgia, serif;
+  --section-y: 5.5rem;
+  --display-size: 3.75rem;
+  --display-hero: clamp(3.5rem, 12vw, 9rem);
+  --radius: 0.125rem;
+  --background: oklch(0.98 0.008 95);
+  --foreground: oklch(0.22 0.015 100);
+  --card: oklch(0.99 0.006 95);
+  --card-foreground: oklch(0.22 0.015 100);
+  --popover: oklch(0.99 0.006 95);
+  --popover-foreground: oklch(0.22 0.015 100);
+  --primary: oklch(0.37 0.055 122);
+  --primary-foreground: oklch(0.98 0.008 95);
+  --secondary: oklch(0.95 0.01 95);
+  --secondary-foreground: oklch(0.22 0.015 100);
+  --muted: oklch(0.95 0.01 95);
+  --muted-foreground: oklch(0.48 0.015 100);
+  --accent: oklch(0.37 0.055 122);
+  --accent-foreground: oklch(0.98 0.008 95);
+  --destructive: oklch(0.5 0.14 25);
+  --border: oklch(0.88 0.012 95);
+  --input: oklch(0.88 0.012 95);
+  --ring: oklch(0.37 0.055 122);
 }

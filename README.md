@@ -10,7 +10,7 @@ Primitives are Tailwind v4 + Base UI (`base-nova`). Do not flip the primitive ba
 
 | Pack | Use |
 |---|---|
-| `theme-editorial` | Boutique builder magazine. Serif display, warm paper, generous space. |
+| `theme-editorial` | Cinematic community page. Eggshell, olive, squared serif. |
 | `theme-coastal` | Quiet land / lake / place. Moss, birch, sand. Photo bands. |
 | `theme-sharp` | Modern infill. Sans only, high contrast, tight density. |
 
@@ -56,8 +56,8 @@ Structure only — never wordmarks, photos, or client copy.
 
 | Site | What we took | What we left |
 |---|---|---|
-| Trevalli Homes | Magazine chapters, editorial + facts + published site plan, tour dialog, collection story | Listing pages, maps, brand hex, fonts |
-| Wright Haven | Alternating split chapters (`photoSide`), photo CTA band, communities as stacked rows | Mega-menu price cards, gold/olive hex, award hero |
+| Wright Haven · Pasture Edge brand · The Pines | Cinematic flush chapter, overlay header, eggshell/olive tokens, squared radius, photo CTA | Wordmarks, “Book with Sarah”, listing/price cards, client hex in blocks |
+| Trevalli Homes | Do not use as a visual source | Magazine columns, bronze, rounded paper, listing pages |
 
 A future client site picks a theme pack, then these same blocks.
 

@@ -35,7 +35,7 @@ export function CommunitiesNav({
 
   return (
     <details className={cn("relative", className)}>
-      <summary className="cursor-pointer list-none text-sm font-medium tracking-[0.08em] text-muted-foreground uppercase marker:content-none hover:text-foreground [&::-webkit-details-marker]:hidden">
+      <summary className="cursor-pointer list-none text-sm font-medium tracking-[0.12em] text-inherit uppercase marker:content-none opacity-80 hover:opacity-100 [&::-webkit-details-marker]:hidden">
         Communities
       </summary>
       <div className="absolute top-full left-0 z-40 mt-2 w-72 rounded-lg bg-popover p-2 text-popover-foreground shadow-md ring-1 ring-foreground/10">

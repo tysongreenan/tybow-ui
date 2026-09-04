@@ -1,22 +1,23 @@
 import type { Metadata } from "next"
 import {
+  Cormorant_Garamond,
   Figtree,
-  Fraunces,
   Geist,
   Geist_Mono,
+  Montserrat,
   Newsreader,
-  Source_Sans_3,
 } from "next/font/google"
 
 import "./globals.css"
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 })
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 })
 
@@ -54,7 +55,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="editorial"
-      className={`${fraunces.variable} ${sourceSans.variable} ${newsreader.variable} ${figtree.variable} ${geistSans.variable} ${geistMono.variable}`}
+      className={`${cormorant.variable} ${montserrat.variable} ${newsreader.variable} ${figtree.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
       <body>{children}</body>
     </html>

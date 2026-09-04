@@ -3,26 +3,25 @@
 import * as React from "react"
 import Link from "next/link"
 
-import { Button } from "@/components/ui/button"
 import { Chapter } from "@/components/tybow/chapter"
 import { CollectionStory } from "@/components/tybow/collection-story"
-import { CtaBand } from "@/components/tybow/cta-band"
 import { EditorialBlock } from "@/components/tybow/editorial-block"
-import { FactsStrip } from "@/components/tybow/facts-strip"
 import { FlushPhoto } from "@/components/tybow/flush-photo"
-import { HomeStory } from "@/components/tybow/home-story"
+import { LooksRow } from "@/components/tybow/looks-row"
+import { PreviewSteps } from "@/components/tybow/preview-steps"
 import { SiteFooter } from "@/components/tybow/site-footer"
 import { SiteHeader } from "@/components/tybow/site-header"
 import { SitePlan } from "@/components/tybow/site-plan"
 import { TourDialog } from "@/components/tybow/tour-dialog"
+import { TourForm } from "@/components/tybow/tour-form"
 import { sampleContent } from "@/lib/sample-content"
 import { tybowThemes, type TybowTheme } from "@/lib/themes"
 import { cn } from "@/lib/utils"
 
 const nav = [
-  { href: "#community", label: "Community" },
+  { href: "#looks", label: "The look" },
+  { href: "#community", label: "Finished" },
   { href: "#plans", label: "Plans" },
-  { href: "#ready-now", label: "Ready now" },
   { href: "#contact", label: "Contact" },
 ]
 
@@ -30,6 +29,9 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
   const [tourOpen, setTourOpen] = React.useState(false)
   const cedar = sampleContent.communities[0]
   const millbrook = sampleContent.communities[1]
+  const pasture = sampleContent.communities[2]
+  const willow = sampleContent.plans[0]
+  const ash = sampleContent.plans[1]
   const home = sampleContent.readyHomes[0]
 
   React.useEffect(() => {
@@ -45,15 +47,14 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
         plans={sampleContent.plans}
       />
 
-      <div className="fixed top-3 right-3 z-[60] flex items-center gap-1 rounded-lg bg-background/90 p-1 shadow-sm ring-1 ring-foreground/10 backdrop-blur">
-        <span className="sr-only">Tybow UI theme</span>
+      <div className="fixed top-3 right-3 z-[60] flex items-center gap-1 rounded-sm bg-background/90 p-1 shadow-sm ring-1 ring-foreground/10 backdrop-blur">
         {tybowThemes.map((item) => (
           <Link
             key={item}
             href={`/kitchen-sink?theme=${item}`}
             aria-current={theme === item ? "page" : undefined}
             className={cn(
-              "rounded-lg px-2.5 py-1 text-xs capitalize",
+              "rounded-sm px-2.5 py-1 text-xs capitalize",
               theme === item
                 ? "bg-primary text-primary-foreground"
                 : "text-foreground hover:bg-muted",
@@ -79,92 +80,146 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
           id="home"
           eyebrow={`Coming soon · ${cedar.town}`}
           line={cedar.name}
-          copy={cedar.oneLiner}
+          copy="Fully finished homes. Each one released complete."
           photo={cedar.hero}
-          cta={{ href: "#contact", label: "Book a tour" }}
+          cta={{ href: "#contact", label: "Book a private tour" }}
+          secondaryCta={{ href: "#contact", label: "Join the list" }}
           layout="stacked"
           tone="flush"
         />
 
-        <section id="community">
-          <EditorialBlock
-            eyebrow="The look"
-            title="Stone, stucco, and long windows."
-            copy="A community page is type on a photograph, then an honest block, a facts strip, and a published site plan. Not a magazine column and not a listing grid."
-          />
-          <div className="relative h-[70vh] min-h-[28rem] w-full overflow-hidden">
-            <FlushPhoto
-              src={millbrook.hero?.src}
-              alt={millbrook.hero?.alt ?? "replace with client photo"}
-              className="absolute inset-0 size-full"
-            />
-          </div>
-          <div className="mx-auto max-w-[1100px] px-[7vw] py-section">
-            <FactsStrip
-              modelAddress={cedar.modelAddress}
-              hours={cedar.hours}
-              lotLine={cedar.lotLine}
-            />
-          </div>
-          <SitePlan
-            src={cedar.sitePlan?.src}
-            alt={cedar.sitePlan?.alt}
-            note="A published drawing. No sold colors, no GIS."
-          />
-        </section>
+        <LooksRow
+          id="looks"
+          eyebrow="Available home designs"
+          title="Stucco, stone and long windows"
+          copy="Different silhouettes. The same finish. This is a looks row, not a listing grid."
+          looks={[
+            {
+              name: willow.name,
+              line: "Board and batten",
+              photo: willow.image,
+            },
+            {
+              name: ash.name,
+              line: "Stone arch",
+              photo: ash.image,
+            },
+            {
+              name: home.name,
+              line: "Craftsman",
+              photo: home.photo,
+            },
+            {
+              name: millbrook.name,
+              line: "French country",
+              photo: millbrook.hero,
+            },
+          ]}
+        />
 
-        <section id="plans" className="bg-background">
-          <div className="mx-auto max-w-[1100px] px-[7vw] py-section">
-            <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-              Plans
-            </p>
-            <h2 className="mt-4 font-display text-display text-foreground">
-              Floor plans, listed honestly.
-            </h2>
-            <ul className="mt-8 space-y-3">
-              {sampleContent.plans.map((plan) => (
-                <li key={plan.slug} className="border-t border-border pt-3">
-                  <p className="font-display text-foreground">{plan.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {plan.beds} bed · {plan.baths} bath
-                    {plan.sqft ? ` · ${plan.sqft.toLocaleString()} sq ft` : ""}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        <EditorialBlock
+          id="community"
+          eyebrow="Fully finished"
+          title="You choose the plan. The finishes are already in."
+          copy="These are not inventory homes waiting on a street, and they are not a base model you upgrade later. You pick a plan and a lot. The exterior is already set."
+          coda="We build it for you, under a million dollars."
+          pointsTitle="Included in the price"
+          points={[
+            "Quartz counters",
+            "Hardwood main floor",
+            "Upgraded cabinetry and island",
+            "Stone exterior wainscot",
+            "Designer lighting package",
+            "Ensuite glass shower",
+          ]}
+          photo={millbrook.hero}
+          cta={{ href: "#contact", label: "Book a private preview" }}
+          note="Final specification confirmed at your appointment."
+        />
 
-        <section id="ready-now">
-          <CollectionStory
-            title={`${sampleContent.readyHomes.length} homes ready now`}
-            copy="One intro, one collage, an honest paragraph, and the next step. Never a three-up listing grid."
-            collage={sampleContent.readyHomes
-              .map((item) => item.photo)
-              .filter((item): item is NonNullable<typeof item> => Boolean(item))}
-            primaryCta={{ href: "#contact", label: "Book a tour" }}
-            secondaryCta={{ href: `#${home.slug}`, label: "Read a home story" }}
-          />
-          <HomeStory
-            id={home.slug}
-            title={home.name}
-            specLine={home.specLine}
-            summary={home.summary}
-            photo={home.photo}
-          />
-        </section>
+        <CollectionStory
+          id="why"
+          eyebrow="Why this place"
+          title="A different kind of new home."
+          copy="Finished. Built quickly. Chosen by the designers. The scale changed. The build did not."
+          cards={[
+            {
+              title: "Finished",
+              line: "No base model. No upgrade sheet.",
+              photo: cedar.hero,
+            },
+            {
+              title: "Built quickly",
+              line: "Fixed spec. Signing to keys, faster.",
+              photo: millbrook.hero,
+            },
+            {
+              title: "Chosen",
+              line: "All the taste, none of the spiral.",
+              photo: pasture.hero,
+            },
+          ]}
+        />
 
-        <section id="contact">
-          <CtaBand
-            headline="Walk a model this weekend."
-            phone={sampleContent.phone}
-            onBookTour={() => setTourOpen(true)}
-            photo={cedar.hero}
-          />
-          <div className="mx-auto flex max-w-[1400px] justify-center px-[7vw] py-10">
-            <Button type="button" onClick={() => setTourOpen(true)}>
-              Open tour dialog
-            </Button>
+        <PreviewSteps
+          id="plans"
+          eyebrow="The private preview"
+          title="See it before anyone else does"
+          copy="Thirty minutes, no obligation. The homes, the plans and the lots stay off the public page until you sit down with us."
+          steps={[
+            {
+              title: "Book",
+              copy: "Choose a time to preview a space. Thirty minutes, no obligation.",
+            },
+            {
+              title: "Preview",
+              copy: "See the homes, the plans and the lots — none of which are public yet.",
+            },
+            {
+              title: "Reserve",
+              copy: "If a lot is right for you, hold it before the community opens to the public.",
+            },
+          ]}
+          cta={{ href: "#contact", label: "Book a private tour" }}
+        />
+
+        <SitePlan
+          src={cedar.sitePlan?.src}
+          alt={cedar.sitePlan?.alt}
+          note="Artist’s concept. Lot lines approximate and subject to final survey."
+        />
+
+        <section
+          id="contact"
+          className="bg-primary px-[7vw] py-section text-primary-foreground"
+        >
+          <div className="mx-auto grid max-w-[1100px] items-start gap-10 lg:grid-cols-2">
+            <div className="relative aspect-[4/5] overflow-hidden bg-primary-foreground/10">
+              <FlushPhoto
+                src={home.photo?.src}
+                alt={home.photo?.alt ?? "replace with client photo"}
+                className="absolute inset-0 size-full"
+              />
+            </div>
+            <div className="text-primary-foreground">
+              <p className="text-[0.7rem] font-medium tracking-[0.26em] uppercase opacity-80">
+                Your contact
+              </p>
+              <h2 className="mt-3 font-display text-4xl font-medium">
+                Book a private tour
+              </h2>
+              <p className="mt-4 max-w-[36ch] text-lg text-pretty opacity-90">
+                Name, email, phone, community, plan of interest, and a short
+                message. We will follow up.
+              </p>
+              <div className="mt-8 rounded-sm bg-background p-6 text-foreground">
+                <TourForm
+                  communities={sampleContent.communities}
+                  plans={sampleContent.plans}
+                  onSubmit={() => setTourOpen(false)}
+                />
+              </div>
+            </div>
           </div>
         </section>
       </main>

@@ -219,7 +219,7 @@
       "name": "editorial-block",
       "type": "registry:block",
       "title": "Editorial block",
-      "description": "Why this place: big line, short copy, optional photo.",
+      "description": "Pines decided split: uppercase display, copy, tick schedule, photo bleeding to the edge.",
       "files": [
         {
           "path": "src/components/tybow/editorial-block.tsx",
@@ -310,7 +310,7 @@
       "name": "collection-story",
       "type": "registry:block",
       "title": "Collection story",
-      "description": "Ready-now collection: one intro, one collage, honest paragraph, CTAs. Never a listing grid.",
+      "description": "Why-this-place deck: intro copy plus a photo rail with overlay titles. Not a listing grid.",
       "registryDependencies": ["button"],
       "files": [
         {
@@ -319,6 +319,35 @@
         },
         {
           "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "looks-row",
+      "type": "registry:block",
+      "title": "Looks row",
+      "description": "Elevation strip: captioned looks in a horizontal row, not for-sale cards.",
+      "files": [
+        {
+          "path": "src/components/tybow/looks-row.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/flush-photo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "preview-steps",
+      "type": "registry:block",
+      "title": "Preview steps",
+      "description": "Book, preview, reserve. Centered 1-2-3 from the Pines journey.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/tybow/preview-steps.tsx",
           "type": "registry:component"
         }
       ]

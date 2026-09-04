@@ -11,6 +11,7 @@ export type ChapterProps = {
   copy?: string
   photo?: { src?: string; alt: string }
   cta?: { href: string; label: string }
+  secondaryCta?: { href: string; label: string }
   layout?: "stacked" | "split"
   /** Split only. Alternate photo side; still one layout, not a third variant. */
   photoSide?: "start" | "end"
@@ -25,6 +26,7 @@ export function Chapter({
   copy,
   photo,
   cta,
+  secondaryCta,
   layout = "stacked",
   photoSide = "end",
   tone = "paper",
@@ -81,18 +83,34 @@ export function Chapter({
           {copy}
         </p>
       ) : null}
-      {cta ? (
-        <p className={cn(flush ? "mt-8" : "mt-10")}>
-          <Link
-            href={cta.href}
-            className={buttonVariants({
-              variant: flush ? "secondary" : "outline",
-              size: "lg",
-            })}
-          >
-            {cta.label}
-          </Link>
-        </p>
+      {cta || secondaryCta ? (
+        <div className={cn("flex flex-wrap items-center gap-3", flush ? "mt-8" : "mt-10")}>
+          {cta ? (
+            <Link
+              href={cta.href}
+              className={buttonVariants({
+                variant: flush ? "secondary" : "default",
+                size: "lg",
+              })}
+            >
+              {cta.label}
+            </Link>
+          ) : null}
+          {secondaryCta ? (
+            <Link
+              href={secondaryCta.href}
+              className={buttonVariants({
+                variant: "outline",
+                size: "lg",
+                className: flush
+                  ? "border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  : undefined,
+              })}
+            >
+              {secondaryCta.label}
+            </Link>
+          ) : null}
+        </div>
       ) : null}
     </div>
   )

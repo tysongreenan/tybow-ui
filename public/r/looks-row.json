@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "looks-row",
+  "title": "Looks row",
+  "description": "Elevation strip: captioned looks in a horizontal row, not for-sale cards.",
+  "files": [
+    {
+      "path": "src/components/tybow/looks-row.tsx",
+      "content": "import { FlushPhoto } from \"@/components/tybow/flush-photo\"\n\nexport type LooksRowItem = {\n  name: string\n  line: string\n  photo?: { src?: string; alt: string }\n}\n\nexport type LooksRowProps = {\n  id?: string\n  eyebrow?: string\n  title: string\n  copy: string\n  looks: LooksRowItem[]\n}\n\nexport function LooksRow({\n  id,\n  eyebrow,\n  title,\n  copy,\n  looks,\n}: LooksRowProps) {\n  return (\n    <section id={id} className=\"bg-background px-[7vw] py-section\">\n      {eyebrow ? (\n        <p className=\"text-[0.7rem] font-medium tracking-[0.26em] text-primary uppercase\">\n          {eyebrow}\n        </p>\n      ) : null}\n      <h2 className=\"mt-3 max-w-[46rem] font-display text-[length:clamp(1.85rem,3.2vw,3rem)] font-light tracking-[0.055em] text-foreground uppercase\">\n        {title}\n      </h2>\n      <p className=\"mt-4 max-w-[46rem] text-pretty text-foreground\">{copy}</p>\n      <ul className=\"mt-10 flex gap-3 overflow-x-auto pb-2\">\n        {looks.map((look) => (\n          <li key={look.name} className=\"w-[11.5rem] shrink-0\">\n            <div className=\"relative aspect-[4/3] overflow-hidden bg-muted\">\n              <FlushPhoto\n                src={look.photo?.src}\n                alt={look.photo?.alt ?? look.name}\n                className=\"absolute inset-0 size-full\"\n              />\n            </div>\n            <p className=\"mt-2 text-[0.7rem] font-semibold tracking-[0.12em] text-foreground uppercase\">\n              {look.name}\n            </p>\n            <p className=\"text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase\">\n              {look.line}\n            </p>\n          </li>\n        ))}\n      </ul>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/components/tybow/flush-photo.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport type FlushPhotoProps = {\n  src?: string\n  alt: string\n  label?: string\n  fit?: \"cover\" | \"contain\"\n  className?: string\n}\n\nexport function FlushPhoto({\n  src,\n  alt,\n  label = \"replace with client photo\",\n  fit = \"cover\",\n  className,\n}: FlushPhotoProps) {\n  return (\n    <div className={cn(\"relative overflow-hidden bg-muted\", className)}>\n      {src ? (\n        // Parent owns crop and radius. No inner mat.\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={src}\n          alt={alt}\n          className={cn(\n            \"absolute inset-0 size-full\",\n            fit === \"contain\" ? \"object-contain\" : \"object-cover\",\n          )}\n        />\n      ) : (\n        <div\n          className=\"absolute inset-0 flex items-center justify-center bg-muted px-6 text-center\"\n          role=\"img\"\n          aria-label={alt}\n        >\n          <p className=\"text-sm text-muted-foreground\">{label}</p>\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

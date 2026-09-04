@@ -165,6 +165,14 @@ export const catalog: CatalogGroup[] = [
         preview: "full",
       },
       {
+        slug: "homes-explorer",
+        title: "Homes map",
+        description:
+          "Map with pins and listing cards. Click a card to open the home on the map.",
+        kind: "block",
+        preview: "full",
+      },
+      {
         slug: "home-story",
         title: "Home story",
         description: "Single home landing: gallery, specs, ask CTA.",

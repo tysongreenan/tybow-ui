@@ -426,6 +426,36 @@
       ]
     },
     {
+      "name": "homes-explorer",
+      "type": "registry:block",
+      "title": "Homes map",
+      "description": "Map with pins and listing cards. Click a card to open the home on the map.",
+      "dependencies": ["maplibre-gl"],
+      "files": [
+        {
+          "path": "src/components/tybow/homes-explorer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/homes-map-frame.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/homes-map.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/map-style.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/components/tybow/tybow-map.css",
+          "type": "registry:file",
+          "target": "components/tybow/tybow-map.css"
+        }
+      ]
+    },
+    {
       "name": "looks-row",
       "type": "registry:block",
       "title": "Looks row",

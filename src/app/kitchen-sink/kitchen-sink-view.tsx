@@ -9,6 +9,7 @@ import { ContactDemo } from "@/demos"
 import { EditorialBlockDemo } from "@/demos"
 import { HomeStoryDemo } from "@/demos"
 import { HomesCollectionDemo } from "@/demos"
+import { HomesExplorerDemo } from "@/demos"
 import { LooksCarouselDemo } from "@/demos"
 import { LooksRowDemo } from "@/demos"
 import { PreviewStepsDemo } from "@/demos"
@@ -59,6 +60,7 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
           <EditorialBlockDemo />
           <CollectionStoryDemo />
           <HomesCollectionDemo />
+          <HomesExplorerDemo />
           <HomeStoryDemo />
           <PreviewStepsDemo />
           <SitePlanDemo />

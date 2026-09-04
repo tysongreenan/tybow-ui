@@ -185,6 +185,14 @@ export const sampleContent: SiteContent = {
       summary:
         "A finished home on a quiet court. Walk the model this weekend and ask about closing.",
       photo: photo("14-elm", "14 Elm Court"),
+      photos: [
+        photo("14-elm", "14 Elm Court"),
+        photo("14-elm-2", "14 Elm Court kitchen"),
+      ],
+      price: "$890,000",
+      city: "Millfield",
+      lat: 43.551,
+      lng: -80.249,
     },
     {
       slug: "8-birch-lane",
@@ -194,6 +202,46 @@ export const sampleContent: SiteContent = {
       summary:
         "A larger plan with a south garden. Ready when the current owner’s work is complete.",
       photo: photo("8-birch", "8 Birch Lane"),
+      photos: [
+        photo("8-birch", "8 Birch Lane"),
+        photo("8-birch-2", "8 Birch Lane garden"),
+      ],
+      price: "$960,000",
+      city: "Ashford",
+      lat: 43.5488,
+      lng: -80.2512,
+    },
+    {
+      slug: "22-maple-row",
+      name: "22 Maple Row",
+      communitySlug: "millbrook",
+      specLine: "3 bed · 2.5 bath · 2,410 sq ft",
+      summary: "A two-storey on the mill race, ready this season.",
+      photo: photo("22-maple", "22 Maple Row"),
+      photos: [
+        photo("22-maple", "22 Maple Row"),
+        photo("22-maple-2", "22 Maple Row living"),
+      ],
+      price: "$925,000",
+      city: "Ashford",
+      lat: 43.5524,
+      lng: -80.2478,
+    },
+    {
+      slug: "5-oak-walk",
+      name: "5 Oak Walk",
+      communitySlug: "cedar-ridge",
+      specLine: "3 bed · 2 bath · 1,890 sq ft",
+      summary: "A bungalow at the wooded edge of the concession.",
+      photo: photo("5-oak", "5 Oak Walk"),
+      photos: [
+        photo("5-oak", "5 Oak Walk"),
+        photo("5-oak-2", "5 Oak Walk rear"),
+      ],
+      price: "$840,000",
+      city: "Millfield",
+      lat: 43.5495,
+      lng: -80.252,
     },
   ],
 }

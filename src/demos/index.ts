@@ -10,6 +10,7 @@ import FactsStripDemo from "@/demos/facts-strip"
 import FlushPhotoDemo from "@/demos/flush-photo"
 import HomeCardDemo from "@/demos/home-card"
 import HomesCollectionDemo from "@/demos/homes-collection"
+import HomesExplorerDemo from "@/demos/homes-explorer"
 import HomeStoryDemo from "@/demos/home-story"
 import LooksCarouselDemo from "@/demos/looks-carousel"
 import LooksRowDemo from "@/demos/looks-row"
@@ -31,6 +32,7 @@ export const demos: Record<string, ComponentType> = {
   "flush-photo": FlushPhotoDemo,
   "home-card": HomeCardDemo,
   "homes-collection": HomesCollectionDemo,
+  "homes-explorer": HomesExplorerDemo,
   "home-story": HomeStoryDemo,
   "looks-carousel": LooksCarouselDemo,
   "looks-row": LooksRowDemo,
@@ -48,6 +50,7 @@ export { default as ContactDemo } from "@/demos/contact"
 export { default as EditorialBlockDemo } from "@/demos/editorial-block"
 export { default as HomeCardDemo } from "@/demos/home-card"
 export { default as HomesCollectionDemo } from "@/demos/homes-collection"
+export { default as HomesExplorerDemo } from "@/demos/homes-explorer"
 export { default as HomeStoryDemo } from "@/demos/home-story"
 export { default as LooksCarouselDemo } from "@/demos/looks-carousel"
 export { default as LooksRowDemo } from "@/demos/looks-row"

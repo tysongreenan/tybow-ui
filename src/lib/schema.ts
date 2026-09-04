@@ -46,6 +46,11 @@ export type ReadyHome = {
   specLine: string
   summary: string
   photo?: { src: string; alt: string }
+  photos?: { src: string; alt: string }[]
+  price?: string
+  city?: string
+  lat?: number
+  lng?: number
 }
 
 export type SiteContent = {

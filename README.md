@@ -4,7 +4,7 @@ A shadcn registry for community-builder marketing sites. Namespace `@tybow`. Sam
 
 Kitchen sink: [/kitchen-sink](/kitchen-sink) — titled **Tybow UI**, with `?theme=editorial|coastal|sharp`.
 
-Primitives are Tailwind v4 + Base UI (`base-nova`). Do not flip the primitive base silently.
+Primitives are **shadcn/ui on Base UI** (`components.json` → `"style": "base-nova"`). Dialog, select, sheet, button, and input import `@base-ui/react`, not Radix. Do not run `shadcn init --base radix` in this repo.
 
 ## Themes
 

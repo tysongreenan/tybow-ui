@@ -11,4 +11,4 @@ This repo is the source of truth for Tybow UI.
 - After a client site ships a block that was used twice, promote it here before the next site starts.
 - Max two layout variants per block (stacked | split).
 - Themes: editorial, coastal, sharp. Do not add a fourth until one of these is deleted.
-- Primitives stay on Base UI (`style: base-nova` in `components.json`). Do not switch the registry to Radix.
+- Primitives stay on shadcn Base UI (`"style": "base-nova"`). Imports are `@base-ui/react/*`. Do not switch to Radix.

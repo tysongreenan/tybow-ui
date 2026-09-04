@@ -391,25 +391,37 @@
       "name": "home-card",
       "type": "registry:block",
       "title": "Home card",
-      "description": "Property card: photo crossfade, spec grid, two CTAs. Not a 3-up listing grid.",
-      "registryDependencies": ["button"],
+      "description": "Collection card: photo carousel, sqft badge, compare, specs, view details.",
       "files": [
         {
           "path": "src/components/tybow/home-card.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/tybow/arrow-button.tsx",
-          "type": "registry:ui"
-        },
+          "path": "src/components/tybow/tybow-collection.css",
+          "type": "registry:file",
+          "target": "components/tybow/tybow-collection.css"
+        }
+      ]
+    },
+    {
+      "name": "homes-collection",
+      "type": "registry:block",
+      "title": "Homes collection",
+      "description": "Filter sidebar plus a 2-up grid of home cards. Sort, bedrooms, garage, size.",
+      "files": [
         {
-          "path": "src/components/tybow/flush-photo.tsx",
+          "path": "src/components/tybow/homes-collection.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/tybow/tybow-motion.css",
+          "path": "src/components/tybow/home-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/tybow/tybow-collection.css",
           "type": "registry:file",
-          "target": "components/tybow/tybow-motion.css"
+          "target": "components/tybow/tybow-collection.css"
         }
       ]
     },

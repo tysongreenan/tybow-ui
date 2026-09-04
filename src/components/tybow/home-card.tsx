@@ -1,194 +1,214 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 
-import "./tybow-motion.css"
+import "./tybow-collection.css"
 
-import { ArrowButton } from "@/components/tybow/arrow-button"
-import { MediaStack } from "@/components/tybow/flush-photo"
-import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export type HomeCardPhoto = { src?: string; alt: string; label?: string }
+export type HomeCardPhoto = {
+  src?: string
+  alt: string
+  label?: string
+  fit?: "cover" | "contain"
+}
 
 export type HomeCardProps = {
-  id?: string
-  eyebrow: string
   title: string
+  href?: string
   price?: string
-  sqft?: string
+  sqft?: number | string
   beds?: string
   baths?: string
   garage?: string
+  kind?: string
+  modelHome?: boolean
   photos: HomeCardPhoto[]
-  primaryCta?: { href: string; label: string }
-  secondaryCta?: { href: string; label: string }
-  onPrimary?: () => void
-  onSecondary?: () => void
+  compared?: boolean
+  onCompare?: () => void
+  compareFull?: boolean
   className?: string
 }
 
-function Spec({ value, label }: { value?: string; label: string }) {
-  if (!value) return null
-  return (
-    <div className="border border-border px-4 py-3">
-      <p className="font-display text-xl text-foreground">{value}</p>
-      <p className="mt-1 text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase">
-        {label}
-      </p>
-    </div>
-  )
+function fmtSqft(value?: number | string) {
+  if (value == null || value === "") return ""
+  const n = typeof value === "number" ? value : Number(String(value).replace(/[^\d.]/g, ""))
+  if (!Number.isFinite(n)) return String(value)
+  return n.toLocaleString("en-CA")
 }
 
 export function HomeCard({
-  id,
-  eyebrow,
   title,
+  href,
   price,
   sqft,
   beds,
   baths,
   garage,
+  kind,
+  modelHome,
   photos,
-  primaryCta,
-  secondaryCta,
-  onPrimary,
-  onSecondary,
+  compared,
+  onCompare,
+  compareFull,
   className,
 }: HomeCardProps) {
   const [on, setOn] = useState(0)
-  const [restartKey, setRestartKey] = useState(0)
-  const rootRef = useRef<HTMLDivElement>(null)
-  const timerRef = useRef<number | null>(null)
-  const current = photos[on]
+  const slides = photos.length ? photos : [{ alt: title, label: "Exterior" }]
+  const current = slides[on]
+  const sqftLabel = fmtSqft(sqft)
+  const specs = [kind, beds && `${beds} Bed`, baths && `${baths} Bath`, garage, sqftLabel && `${sqftLabel} Sq Ft`]
+    .filter(Boolean)
+    .join(" · ")
 
-  function go(n: number) {
-    if (!photos.length) return
-    setOn((n + photos.length) % photos.length)
-    setRestartKey((key) => key + 1)
+  function go(next: number) {
+    if (slides.length < 2) return
+    setOn((next + slides.length) % slides.length)
   }
-
-  useEffect(() => {
-    if (photos.length < 2) return
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const root = rootRef.current
-
-    function stop() {
-      if (timerRef.current) window.clearInterval(timerRef.current)
-      timerRef.current = null
-    }
-
-    function restart() {
-      stop()
-      if (reduce) return
-      timerRef.current = window.setInterval(() => {
-        setOn((i) => (i + 1) % photos.length)
-      }, 5200)
-    }
-
-    restart()
-    if (!root) return () => stop()
-
-    const onEnter = () => stop()
-    const onLeave = () => restart()
-    root.addEventListener("mouseenter", onEnter)
-    root.addEventListener("mouseleave", onLeave)
-    return () => {
-      stop()
-      root.removeEventListener("mouseenter", onEnter)
-      root.removeEventListener("mouseleave", onLeave)
-    }
-  }, [photos.length, restartKey])
 
   return (
     <article
-      id={id}
       className={cn(
-        "grid items-stretch gap-0 bg-background lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,24rem)]",
+        "tybow-home-card group relative flex cursor-pointer flex-col overflow-hidden border border-border bg-card transition-[background-color,border-color,transform] duration-200 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-muted",
+        compareFull && "is-full",
         className,
       )}
+      onClick={(event) => {
+        if (!href) return
+        if ((event.target as HTMLElement).closest("a, button, label, input")) return
+        window.location.href = href
+      }}
     >
-      <div
-        ref={rootRef}
-        className="relative min-h-[18rem] overflow-hidden bg-muted lg:min-h-[28rem]"
-      >
-        <MediaStack
-          frames={photos}
-          on={on}
-          slideClassName="tybow-overview-slide"
-          className="absolute inset-0 size-full"
-        />
-        {current?.label ? (
-          <span className="absolute bottom-4 left-4 z-[2] bg-foreground/70 px-3 py-1 text-[0.65rem] tracking-[0.16em] text-primary-foreground uppercase">
-            {current.label}
-          </span>
-        ) : null}
-        {photos.length > 1 ? (
+      <div className="relative aspect-[3/2] overflow-hidden bg-muted">
+        {slides.map((slide, index) =>
+          slide.src ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={`${slide.src}-${index}`}
+              src={slide.src}
+              alt={index === on ? `${title} — ${slide.label ?? slide.alt}` : ""}
+              className={cn(
+                "tybow-home-card-slide absolute inset-0 size-full transition-opacity duration-300",
+                index === on ? "opacity-100" : "opacity-0",
+                slide.fit === "contain" ? "object-contain bg-background p-2.5" : "object-cover",
+              )}
+            />
+          ) : (
+            <div
+              key={`${slide.alt}-${index}`}
+              className={cn(
+                "tybow-home-card-slide absolute inset-0 bg-muted transition-opacity duration-300",
+                index === on ? "opacity-100" : "opacity-0",
+              )}
+              role="img"
+              aria-label={slide.alt}
+            />
+          ),
+        )}
+
+        {slides.length > 1 ? (
           <>
             <button
               type="button"
-              aria-label="Previous image"
-              className="absolute top-1/2 left-3 z-[3] grid size-[2.4rem] -translate-y-1/2 place-items-center border border-primary-foreground/45 bg-foreground/45 text-[1.35rem] text-primary-foreground"
-              onClick={() => go(on - 1)}
+              aria-label={`Previous image of ${title}`}
+              className="tybow-home-card-arrow absolute top-1/2 left-2.5 z-[3] grid size-[34px] -translate-y-1/2 place-items-center rounded-full border border-primary-foreground/40 bg-foreground/70 text-xl text-primary-foreground transition-opacity"
+              onClick={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
+                go(on - 1)
+              }}
             >
               ‹
             </button>
             <button
               type="button"
-              aria-label="Next image"
-              className="absolute top-1/2 right-3 z-[3] grid size-[2.4rem] -translate-y-1/2 place-items-center border border-primary-foreground/45 bg-foreground/45 text-[1.35rem] text-primary-foreground"
-              onClick={() => go(on + 1)}
+              aria-label={`Next image of ${title}`}
+              className="tybow-home-card-arrow absolute top-1/2 right-2.5 z-[3] grid size-[34px] -translate-y-1/2 place-items-center rounded-full border border-primary-foreground/40 bg-foreground/70 text-xl text-primary-foreground transition-opacity"
+              onClick={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
+                go(on + 1)
+              }}
             >
               ›
             </button>
+            <div className="absolute bottom-2.5 left-1/2 z-[3] flex -translate-x-1/2 gap-1.5" aria-hidden>
+              {slides.map((slide, index) => (
+                <span
+                  key={`${slide.alt}-${index}`}
+                  className={cn(
+                    "size-2 rounded-full border border-primary-foreground/70",
+                    index === on && "border-primary bg-primary",
+                  )}
+                />
+              ))}
+            </div>
           </>
         ) : null}
-      </div>
-      <div className="flex flex-col justify-center border border-border p-6 lg:border-l-0">
-        <p className="text-[0.7rem] font-semibold tracking-[0.16em] text-primary uppercase">
-          {eyebrow}
-        </p>
-        <h2 className="mt-3 font-display text-4xl font-medium text-foreground">
-          {title}
-        </h2>
-        {price ? (
-          <p className="mt-2 font-display text-2xl text-primary">{price}</p>
+
+        {current?.label ? (
+          <span className="absolute bottom-2.5 left-2.5 z-[2] bg-foreground/70 px-2 py-0.5 text-[0.62rem] tracking-[0.1em] text-primary-foreground uppercase">
+            {current.label}
+          </span>
         ) : null}
-        <div className="mt-6 grid grid-cols-2">
-          <Spec value={sqft} label="Sq ft" />
-          <Spec value={beds} label="Bedrooms" />
-          <Spec value={baths} label="Bathrooms" />
-          <Spec value={garage} label="Garage" />
-        </div>
-        <div className="mt-6 grid gap-3">
-          {primaryCta || onPrimary ? (
-            primaryCta ? (
-              <ArrowButton href={primaryCta.href} variant="inverse">
-                {primaryCta.label}
-              </ArrowButton>
-            ) : (
-              <ArrowButton variant="inverse" onClick={onPrimary}>
-                Ask about this home
-              </ArrowButton>
-            )
-          ) : null}
-          {secondaryCta ? (
-            <a
-              href={secondaryCta.href}
-              className={buttonVariants({ variant: "outline", size: "lg" })}
-            >
-              {secondaryCta.label}
+
+        {modelHome ? (
+          <span className="absolute top-2.5 left-2.5 z-[3] bg-primary/90 px-2.5 py-1 text-[0.62rem] font-semibold tracking-[0.12em] text-primary-foreground uppercase">
+            Model home
+          </span>
+        ) : null}
+
+        {sqftLabel ? (
+          <span
+            className={cn(
+              "absolute left-2.5 z-[2] border border-primary-foreground/30 bg-primary/90 px-2.5 py-1 text-[0.62rem] font-semibold tracking-[0.12em] text-primary-foreground uppercase",
+              modelHome ? "top-11" : "top-2.5",
+            )}
+          >
+            {sqftLabel} sq ft
+          </span>
+        ) : null}
+
+        {onCompare ? (
+          <label
+            className="tybow-home-card-compare absolute top-2.5 right-2.5 z-[3] flex cursor-pointer items-center gap-2 border border-primary-foreground/35 bg-primary/90 px-3 py-1.5 text-[0.62rem] font-semibold tracking-[0.14em] text-primary-foreground uppercase"
+            title="Add to compare"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={compared}
+              aria-label={`Compare ${title}`}
+              onChange={onCompare}
+            />
+            <span className="tybow-home-card-check-box relative size-3.5 shrink-0 border-[1.5px] border-primary-foreground/70" />
+            Compare
+          </label>
+        ) : null}
+      </div>
+
+      <div className="px-[18px] pt-4 pb-[18px]">
+        <h3 className="font-display text-[length:clamp(1.35rem,2vw,1.65rem)] font-medium tracking-[-0.01em] text-foreground">
+          {href ? (
+            <a href={href} className="text-inherit no-underline hover:text-primary">
+              {title}
             </a>
-          ) : onSecondary ? (
-            <button
-              type="button"
-              className={buttonVariants({ variant: "outline", size: "lg" })}
-              onClick={onSecondary}
-            >
-              Add to compare
-            </button>
-          ) : null}
-        </div>
+          ) : (
+            title
+          )}
+        </h3>
+        {price ? (
+          <p className="mt-1.5 font-sans text-[1.0625rem] tracking-[0.04em] text-primary">
+            {price}
+          </p>
+        ) : null}
+        {specs ? (
+          <p className="mt-2 text-[0.8125rem] text-muted-foreground">{specs}</p>
+        ) : null}
+        <span className="tybow-home-card-cta mt-2.5 inline-block text-[0.68rem] tracking-[0.12em] text-primary uppercase transition">
+          View home details →
+        </span>
       </div>
     </article>
   )

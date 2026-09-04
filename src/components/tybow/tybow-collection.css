@@ -1,0 +1,108 @@
+/* Pasture Edge collection: filter sidebar + home cards. Token-only. */
+
+@keyframes tybow-card-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.tybow-home-card.is-full .tybow-home-card-compare {
+  animation: tybow-card-shake 0.3s ease;
+  border-color: var(--destructive);
+}
+
+.tybow-home-card-compare:has(input:checked) {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.tybow-home-card-compare input:checked + .tybow-home-card-check-box {
+  background: var(--primary-foreground);
+  border-color: var(--primary-foreground);
+}
+
+.tybow-home-card-compare input:checked + .tybow-home-card-check-box::after,
+.tybow-collection-check input:checked + .tybow-collection-check-box::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.tybow-collection-check input:checked + .tybow-collection-check-box {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.tybow-collection-check input:checked + .tybow-collection-check-box::after {
+  left: 4.5px;
+  top: 1.5px;
+  width: 5px;
+  height: 9px;
+  border-color: var(--primary-foreground);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tybow-home-card-arrow {
+    opacity: 0;
+  }
+
+  .tybow-home-card:hover .tybow-home-card-arrow,
+  .tybow-home-card-arrow:focus-visible {
+    opacity: 1;
+  }
+
+  .tybow-home-card-cta {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+
+  .tybow-home-card:hover .tybow-home-card-cta {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .tybow-collection-filters {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 50;
+    width: min(320px, 86vw);
+    height: 100%;
+    overflow-y: auto;
+    transform: translateX(-105%);
+    transition: transform 0.28s cubic-bezier(0.22, 0.72, 0.22, 1);
+  }
+
+  .tybow-collection-filters.is-open {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tybow-home-card,
+  .tybow-home-card-slide,
+  .tybow-home-card-cta,
+  .tybow-home-card-arrow,
+  .tybow-collection-filters,
+  .tybow-collection-scrim {
+    transition: none;
+  }
+
+  .tybow-home-card.is-full .tybow-home-card-compare {
+    animation: none;
+  }
+}

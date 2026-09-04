@@ -153,14 +153,21 @@ export const catalog: CatalogGroup[] = [
       {
         slug: "home-card",
         title: "Home card",
-        description: "Property card: photo crossfade, spec grid, two CTAs.",
+        description: "Collection card: photo carousel, sqft badge, compare, specs, view details.",
         kind: "block",
         preview: "padded",
       },
       {
+        slug: "homes-collection",
+        title: "Homes collection",
+        description: "Filter sidebar plus a 2-up grid of home cards. Sort, bedrooms, garage, size.",
+        kind: "block",
+        preview: "full",
+      },
+      {
         slug: "home-story",
         title: "Home story",
-        description: "Single home: title, spec line, paragraph, photo crossfade.",
+        description: "Single home landing: gallery, specs, ask CTA.",
         kind: "block",
         preview: "full",
       },

@@ -7,8 +7,8 @@ import { ChapterDemo } from "@/demos"
 import { CollectionStoryDemo } from "@/demos"
 import { ContactDemo } from "@/demos"
 import { EditorialBlockDemo } from "@/demos"
-import { HomeCardDemo } from "@/demos"
 import { HomeStoryDemo } from "@/demos"
+import { HomesCollectionDemo } from "@/demos"
 import { LooksCarouselDemo } from "@/demos"
 import { LooksRowDemo } from "@/demos"
 import { PreviewStepsDemo } from "@/demos"
@@ -58,7 +58,7 @@ export function KitchenSinkView({ theme }: { theme: TybowTheme }) {
           <LooksRowDemo />
           <EditorialBlockDemo />
           <CollectionStoryDemo />
-          <HomeCardDemo />
+          <HomesCollectionDemo />
           <HomeStoryDemo />
           <PreviewStepsDemo />
           <SitePlanDemo />

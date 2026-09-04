@@ -17,14 +17,26 @@ export type Community = {
   sitePlan?: { src: string; alt: string }
 }
 
+export type PlanPhoto = {
+  src: string
+  alt: string
+  label?: string
+  fit?: "cover" | "contain"
+}
+
 export type Plan = {
   slug: string
   communitySlug: string
   name: string
-  beds?: number
-  baths?: number
+  beds?: number | string
+  baths?: number | string
   sqft?: number
+  garage?: string
+  kind?: string
+  price?: number
+  modelHome?: boolean
   image?: { src: string; alt: string }
+  photos?: PlanPhoto[]
 }
 
 export type ReadyHome = {

@@ -1,24 +1,26 @@
 import { HomeCard } from "@/components/tybow/home-card"
-import { cedar, home, willow } from "@/demos/sample"
+import { collectionHomes } from "@/demos/sample"
 
 export default function HomeCardDemo() {
+  const home = collectionHomes()[0]
   return (
     <section className="bg-background px-[7vw] py-section">
-      <HomeCard
-        eyebrow={`${cedar.name} · ${cedar.town} · bungalow`}
-        title={willow.name}
-        price="From $890,000"
-        sqft="2,140"
-        beds="3"
-        baths="2.5"
-        garage="2-car"
-        photos={[
-          { ...(willow.image ?? { alt: willow.name }), label: "Exterior" },
-          { ...(cedar.hero ?? { alt: cedar.name }), label: "Street" },
-        ]}
-        primaryCta={{ href: `#${home.slug}`, label: "Ask about this home" }}
-        secondaryCta={{ href: "#contact", label: "Add to compare" }}
-      />
+      <div className="max-w-xl">
+        <HomeCard
+          title={home.name}
+          href={home.href}
+          price={home.price ? `$${home.price.toLocaleString("en-CA")}` : undefined}
+          sqft={home.sqft}
+          beds={home.beds}
+          baths={home.baths}
+          garage={home.garage}
+          kind={home.kind}
+          modelHome={home.modelHome}
+          photos={home.photos}
+          compared={false}
+          onCompare={() => undefined}
+        />
+      </div>
     </section>
   )
 }
